@@ -90,6 +90,29 @@ turns plugin updates back on). The kit itself never checks for updates or calls 
   update by themselves: compare yours with the new version (the release notes say what changed), or paste the README's
   **Use the kit** prompt again and Claude will offer you the changes.
 
+## Uninstalling
+To pause a plugin without removing it, disable it, and enable it again later:
+
+```sh
+claude plugin disable zxnext-core@specnext-claude-kit
+claude plugin enable zxnext-core@specnext-claude-kit
+```
+
+To remove plugins, uninstall each one you installed, then remove the kit's marketplace:
+
+```sh
+claude plugin uninstall zxnext-core@specnext-claude-kit        # repeat for z80-common, zx-classic, zxnext-unite-mcp
+claude plugin marketplace remove specnext-claude-kit           # forget the kit itself (after its plugins are gone)
+```
+
+- `claude plugin list` shows what is still installed. Inside a session, `/plugin` does the same from a menu.
+- A plugin installed for one project (`--scope project` or `local`) is uninstalled with the same `--scope`.
+- `--keep-data` keeps a plugin's saved data (`~/.claude/plugins/data/...`) in case you install it again.
+- Restart Claude Code (or start a new session) so the removed skills stop loading.
+- Anything you copied from `claude-md/` into your own `CLAUDE.md` is yours: uninstalling does not touch it; delete those
+  lines yourself if you no longer want them. If you connected ZX-Next-Unite with `claude mcp add`, remove that with
+  `claude mcp remove zx-next-unite`.
+
 ## Platforms and plugins
 | Plugin | Platform | Skills | What it gives you |
 |---|---|---|---|
