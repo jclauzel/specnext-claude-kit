@@ -59,6 +59,26 @@ session. You do not call a skill by name: Claude loads it by itself when your ta
 it", "how much room is left", "time it on MAME"). To run one on purpose, type its plugin and skill name as a
 command, for example `/zxnext-core:zxnext-build` or `/z80-common:z80-measure`.
 
+## Updating the kit and your plugins
+When a new release is out (see [Releases](https://github.com/jclauzel/specnext-claude-kit/releases)), two steps:
+
+```sh
+claude plugin marketplace update specnext-claude-kit   # 1. fetch the kit's latest catalogue from GitHub
+claude plugin update zxnext-core@specnext-claude-kit   # 2. update each plugin you installed (repeat per plugin)
+```
+
+Then restart Claude Code (or start a new session): a plugin update applies at the next start.
+
+- `claude plugin list` shows what you have installed and each plugin's version.
+- `claude plugin marketplace update` with no name refreshes every marketplace you have added.
+- Inside a session, `/plugin` opens the same thing as a menu: browse the marketplace, see installed plugins and update
+  them from there.
+- A release that changes only the docs (like 0.1.1) changes no plugin: step 1 is enough to see the new README text on
+  GitHub, and step 2 reports that your plugins are already up to date.
+- Copied a snippet or template from `claude-md/` into your own `CLAUDE.md`? Those are not installed, so they do not
+  update by themselves: compare yours with the new version (the release notes say what changed), or paste the README's
+  **Use the kit** prompt again and Claude will offer you the changes.
+
 ## Platforms and plugins
 | Plugin | Platform | Skills | What it gives you |
 |---|---|---|---|

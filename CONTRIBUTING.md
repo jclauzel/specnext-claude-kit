@@ -54,6 +54,10 @@ If pip refuses with "externally managed environment" (recent Linux and Homebrew 
 environment (`python3 -m venv .venv`, then `.venv/bin/pip install pyyaml` and `.venv/bin/python tools/validate.py`).
 Check it with `python -c "import yaml; print(yaml.__version__)"`. No Python? Use the PowerShell version: same checks.
 
+**Changing a plugin? Raise its `version`** in its `.claude-plugin/plugin.json` (for example 0.1.0 to 0.1.1 for a
+fix, 0.2.0 for a new skill): Claude Code offers users an update only when that version changes. Docs-only changes
+need no plugin version.
+
 Fill in the pull request template. One topic per pull request keeps reviews quick.
 
 ## Reviews
