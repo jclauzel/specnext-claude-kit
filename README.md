@@ -14,8 +14,8 @@ claude plugin marketplace add jclauzel/specnext-claude-kit
 claude plugin install zxnext-core@specnext-claude-kit
 ```
 Then install whichever other plugins you want (`z80-common@specnext-claude-kit`, `zx-classic@specnext-claude-kit`,
-`zxnext-unite-mcp@specnext-claude-kit`), or browse them with `/plugin` inside a session. Skills load on their own when a task
-matches, or run them as `/zxnext-core:zxnext-build` and so on.
+`zxnext-unite-mcp@specnext-claude-kit`), or browse them with `/plugin` inside a session. Skills load on their own
+when a task matches, or run them as `/zxnext-core:zxnext-build` and so on.
 
 ## Platforms and plugins
 | Plugin | Platform | Skills | What it gives you |
