@@ -1,7 +1,7 @@
 <!--
 Template: a ZX Spectrum Next project in C with z88dk (+zxn, zsdcc) and some Z80N assembly.
 Status: distilled from the CLAUDE.md of a real z88dk +zxn game project. Replace every <placeholder>, delete what does
-not apply, and keep the file short: procedures belong in skills (install the zx-claude plugins).
+not apply, and keep the file short: procedures belong in skills (install the specnext-claude-kit plugins).
 -->
 
 # <Project name>: notes for Claude

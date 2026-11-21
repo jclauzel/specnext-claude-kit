@@ -8,7 +8,7 @@ Skills for ZX Spectrum Next development with z88dk.
 | `zxnext-mame` | Run and prove a `.nex` on MAME `specnext_ks3`: SD image copies, an untouched ROM zip, a cap on concurrent MAME processes, the ROM warning SPACE presses, a Lua autoboot runner, log costs, the frame report, the phase rule, comparing runs and looking at shots |
 | `z80n-optimize` | Z80N first, memory first, speed always: the Z80N replacements with bytes and T-states, the ones that can lose, hardware before opcodes, flagging opportunities in existing code |
 
-Install: `claude plugin install zxnext-core@zx-claude` (and `z80-common@zx-claude`, which these skills refer to).
+Install: `claude plugin install zxnext-core@specnext-claude-kit` (and `z80-common@specnext-claude-kit`, which these skills refer to).
 
 ## Tested on
 - **zxnext-build**: generalised from a z88dk `+zxn` game project (C with zsdcc `sdcc_iy`, Z80N asm, many 16 KB pages,

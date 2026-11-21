@@ -1,4 +1,4 @@
-# zx-claude
+# specnext-claude-kit
 
 Claude Code skills and `CLAUDE.md` material for ZX Spectrum development, shared by the community: the ZX Spectrum
 Next first, the classic 48K/128K Spectrum beside it, and Z80 material common to both.
@@ -10,11 +10,11 @@ It is two things in one repository:
 
 ## Install in two commands
 ```sh
-claude plugin marketplace add jclauzel/zx-claude
-claude plugin install zxnext-core@zx-claude
+claude plugin marketplace add jclauzel/specnext-claude-kit
+claude plugin install zxnext-core@specnext-claude-kit
 ```
-Then install whichever other plugins you want (`z80-common@zx-claude`, `zx-classic@zx-claude`,
-`zxnext-unite-mcp@zx-claude`), or browse them with `/plugin` inside a session. Skills load on their own when a task
+Then install whichever other plugins you want (`z80-common@specnext-claude-kit`, `zx-classic@specnext-claude-kit`,
+`zxnext-unite-mcp@specnext-claude-kit`), or browse them with `/plugin` inside a session. Skills load on their own when a task
 matches, or run them as `/zxnext-core:zxnext-build` and so on.
 
 ## Platforms and plugins

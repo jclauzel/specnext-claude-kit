@@ -6,7 +6,7 @@ Skills for the classic ZX Spectrum: 16K, 48K, 128K, +2, +2A and +3.
 |---|---|
 | `zx-memory-map` | The memory map, screen and attribute addresses, 128K paging, contended memory timings, the ULA port, IM 2 tables |
 
-Install: `claude plugin install zx-classic@zx-claude` (and `z80-common@zx-claude` for measuring and code layout,
+Install: `claude plugin install zx-classic@specnext-claude-kit` (and `z80-common@specnext-claude-kit` for measuring and code layout,
 which apply to every Z80 machine).
 
 ## Tested on

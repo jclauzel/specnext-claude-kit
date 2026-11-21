@@ -7,7 +7,7 @@ Skills shared by every Z80 machine (classic Spectrum, Spectrum Next, and any oth
 | `z80-measure` | Measure bytes and T-states with z88dk (`z88dk-z80asm` + `z88dk-ticks`); a C-against-asm harness; the `push nn` byte-order quirk of `z88dk-ticks` (matters only for Z80N) |
 | `z80-code-layout` | Make the common branch fall through; branch costs taken and not taken; loop shapes |
 
-Install: `claude plugin install z80-common@zx-claude`. The skills run as `/z80-common:z80-measure` and
+Install: `claude plugin install z80-common@specnext-claude-kit`. The skills run as `/z80-common:z80-measure` and
 `/z80-common:z80-code-layout`, and Claude loads them on its own when a task matches.
 
 ## Tested on
