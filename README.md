@@ -69,6 +69,15 @@ claude plugin update zxnext-core@specnext-claude-kit   # 2. update each plugin y
 
 Then restart Claude Code (or start a new session): a plugin update applies at the next start.
 
+**Get updates automatically** (set it once): in a Claude Code session run `/plugin`, open the **Marketplaces** tab,
+select `specnext-claude-kit` and choose **Enable auto-update**. Third-party marketplaces like this one start with it
+off, and only you can turn it on. From then on, a little while after your first message in a session (a random wait of
+up to ten minutes), Claude Code refreshes the kit and updates the plugins you installed. It then tells you
+`Plugin updated: <name> · Run /reload-plugins to apply`: run `/reload-plugins` (or start a new session) to use the new
+version; the running session keeps the old one until then. It is skipped when updates are turned off on your machine
+(`DISABLE_UPDATES`, `DISABLE_AUTOUPDATER` or `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`; `FORCE_AUTOUPDATE_PLUGINS=1`
+turns plugin updates back on). The kit itself never checks for updates or calls the network: Claude Code does it.
+
 - `claude plugin list` shows what you have installed and each plugin's version.
 - `claude plugin marketplace update` with no name refreshes every marketplace you have added.
 - Inside a session, `/plugin` opens the same thing as a menu: browse the marketplace, see installed plugins and update
