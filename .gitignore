@@ -1,0 +1,12 @@
+# Generated output stays out of git
+*.bin
+*.map
+*.o
+*.nex
+*.tap
+*.sna
+*.png
+__pycache__/
+*.pyc
+.claude/settings.local.json
+CLAUDE.local.md

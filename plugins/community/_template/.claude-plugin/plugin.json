@@ -1,0 +1,11 @@
+{
+  "name": "author-topic",
+  "version": "0.1.0",
+  "description": "One line: what these skills help with",
+  "author": {
+    "name": "Your Name",
+    "url": "https://github.com/your-github-name"
+  },
+  "license": "MIT",
+  "keywords": ["zx-spectrum-next"]
+}

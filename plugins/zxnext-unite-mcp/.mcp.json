@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "zx-next-unite": {
+      "type": "http",
+      "url": "http://127.0.0.1:2050/mcp"
+    }
+  }
+}

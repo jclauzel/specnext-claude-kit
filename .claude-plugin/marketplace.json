@@ -1,0 +1,38 @@
+{
+  "name": "zx-claude",
+  "description": "Community Claude Code skills and CLAUDE.md material for ZX Spectrum Next, classic ZX Spectrum and Z80 development",
+  "owner": {
+    "name": "jclauzel",
+    "url": "https://github.com/jclauzel"
+  },
+  "plugins": [
+    {
+      "name": "z80-common",
+      "source": "./plugins/z80-common",
+      "description": "Shared by every Z80 machine: measuring bytes and T-states with z88dk-ticks, and code layout",
+      "category": "z80",
+      "tags": ["z80", "z80n", "z88dk", "assembly", "performance"]
+    },
+    {
+      "name": "zxnext-core",
+      "source": "./plugins/zxnext-core",
+      "description": "ZX Spectrum Next: building with z88dk +zxn, proving builds on MAME, Z80N optimisation",
+      "category": "zx-spectrum-next",
+      "tags": ["zx-spectrum-next", "z88dk", "mame", "z80n", "nex"]
+    },
+    {
+      "name": "zxnext-unite-mcp",
+      "source": "./plugins/zxnext-unite-mcp",
+      "description": "Connects Claude Code to the ZX-Next-Unite app's MCP server (disk images, MAME, CSpect, real Nexts)",
+      "category": "zx-spectrum-next",
+      "tags": ["zx-spectrum-next", "mcp", "mame", "cspect"]
+    },
+    {
+      "name": "zx-classic",
+      "source": "./plugins/zx-classic",
+      "description": "Classic 48K/128K ZX Spectrum: the memory map, screen layout, paging and contended memory",
+      "category": "zx-spectrum",
+      "tags": ["zx-spectrum", "48k", "128k", "z80", "contended-memory"]
+    }
+  ]
+}

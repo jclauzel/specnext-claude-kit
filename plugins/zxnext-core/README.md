@@ -1,0 +1,26 @@
+# zxnext-core
+
+Skills for ZX Spectrum Next development with z88dk.
+
+| Skill | What it does |
+|---|---|
+| `zxnext-build` | Build with z88dk `+zxn` into a `.nex`; room per page and in the main bank; the switch pattern (a 0 build that reproduces the previous build byte for byte); refusals before any file is written; the trimmed build table in side-by-side worktrees with MD5 anchors |
+| `zxnext-mame` | Run and prove a `.nex` on MAME `specnext_ks3`: SD image copies, an untouched ROM zip, a cap on concurrent MAME processes, the ROM warning SPACE presses, a Lua autoboot runner, log costs, the frame report, the phase rule, comparing runs and looking at shots |
+| `z80n-optimize` | Z80N first, memory first, speed always: the Z80N replacements with bytes and T-states, the ones that can lose, hardware before opcodes, flagging opportunities in existing code |
+
+Install: `claude plugin install zxnext-core@zx-claude` (and `z80-common@zx-claude`, which these skills refer to).
+
+## Tested on
+- **zxnext-build**: generalised from a z88dk `+zxn` game project (C with zsdcc `sdcc_iy`, Z80N asm, many 16 KB pages,
+  a PowerShell build script, release `.nex` files run on Next hardware). The commands and flags are the ones that
+  project uses. Not tested as written: the generic wording, other build systems (Make, sjasmplus).
+- **zxnext-mame**: MAME 0.289, machine `specnext_ks3` (its default BIOS models core 3.02.04), runs headless and
+  windowed on Windows. `references/lua-runner.md` is a shortened skeleton of a working runner and is **untested as
+  written**.
+- **z80n-optimize**: the instruction table is the SpecNext wiki's (its own caveat: limited testing). The byte and
+  T-state comparisons in the skill were checked with `z88dk-ticks -mz80n` (see `z80-common`'s README). The "lost in
+  one project" and "half a line a frame" notes are measurements from that game project on MAME.
+
+## Not here (yet)
+- sjasmplus-based builds: contributions welcome (see `claude-md/templates/next-sjasmplus-asm.md` for a starting point).
+- CSpect-based proofs: the ZX-Next-Unite plugin can start CSpect; a timing skill for it would be welcome.
