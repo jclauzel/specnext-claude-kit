@@ -44,7 +44,8 @@ The plugins in short:
 - **`z80-common`** is the shared base: how to measure bytes and T-states instead of guessing, and how to lay out
   branches. Every other plugin builds on it.
 - **`zxnext-core`** is the Spectrum Next: building with z88dk `+zxn` (the .nex, room per page, build switches, a build
-  table), proving and timing on MAME safely, and writing Z80N first.
+  table), proving and timing on MAME safely, writing Z80N first, and rewriting the hottest C in Z80N asm without
+  changing what the player sees.
 - **`zxnext-unite-mcp`** adds tools rather than knowledge: it lets Claude drive the ZX-Next-Unite app (load a disk
   image, put files on it, start MAME or CSpect, push a build to a real Next). See its README to enable the app's server.
 - **`zx-classic`** is the classic Spectrum: the memory map, the screen layout, 128K paging and contended memory.
@@ -93,7 +94,7 @@ turns plugin updates back on). The kit itself never checks for updates or calls 
 | Plugin | Platform | Skills | What it gives you |
 |---|---|---|---|
 | [`z80-common`](plugins/z80-common/) | every Z80 machine | `z80-measure`, `z80-code-layout` | bytes and T-states measured with z88dk-ticks; branch layout |
-| [`zxnext-core`](plugins/zxnext-core/) | ZX Spectrum Next | `zxnext-build`, `zxnext-mame`, `z80n-optimize` | z88dk `+zxn` builds and room; MAME proofs; Z80N first |
+| [`zxnext-core`](plugins/zxnext-core/) | ZX Spectrum Next | `zxnext-build`, `zxnext-mame`, `z80n-optimize`, `zxnext-c-to-asm` | z88dk `+zxn` builds and room; MAME proofs; Z80N first; hot C rewritten in Z80N asm |
 | [`zxnext-unite-mcp`](plugins/zxnext-unite-mcp/) | ZX Spectrum Next | (an MCP server) | connects the ZX-Next-Unite app: disk images, MAME, CSpect, real Nexts |
 | [`zx-classic`](plugins/zx-classic/) | 48K / 128K Spectrum | `zx-memory-map` | memory map, screen layout, paging, contended memory |
 | [`community/`](plugins/community/) | any | yours | add your own plugin here |

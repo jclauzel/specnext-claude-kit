@@ -16,7 +16,7 @@
     {
       "name": "zxnext-core",
       "source": "./plugins/zxnext-core",
-      "description": "ZX Spectrum Next: building with z88dk +zxn, proving builds on MAME, Z80N optimisation",
+      "description": "ZX Spectrum Next: building with z88dk +zxn, proving builds on MAME, Z80N optimisation, rewriting hot C in Z80N asm",
       "category": "zx-spectrum-next",
       "tags": ["zx-spectrum-next", "z88dk", "mame", "z80n", "nex"]
     },

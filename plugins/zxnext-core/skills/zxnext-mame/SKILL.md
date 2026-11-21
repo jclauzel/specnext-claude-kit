@@ -23,6 +23,9 @@ control over keys, frames and logs.
 ## Launching a run
 - Tested with MAME 0.289, machine `specnext_ks3`. Its default BIOS models core 3.02.04; a real Next may run a newer
   core, so MAME is a close model, not the hardware. Headless: `-video none -sound none -str <seconds> -nothrottle`.
+- **MAME's frame lines are an upper bound at 28 MHz.** MAME 0.289 adds one wait cycle to every memory read at 28 MHz;
+  a KS3 on core 3.03.03 shows none for code running from $8000 up (`examples/z80n-hw-timing`). So a frame that fits
+  the budget on MAME fits on that hardware, which reads lower; do not tune to MAME's last line.
   The image goes in with `-hard1 <img>`; the script with `-autoboot_script <lua> -autoboot_delay <s>`.
 - **The ROM warning:** a windowed MAME (and one started through ZX-Next-Unite) stops on a "One or more ROMs ...
   incorrect" message at every start. About half a second after starting it, send a couple of SPACE presses into the
