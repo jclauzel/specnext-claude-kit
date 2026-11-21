@@ -3,6 +3,10 @@
 Thank you for sharing what you learned. Everything here is meant to help someone else's Spectrum project, so the
 rules are about being accurate, generic and safe.
 
+The quickest way: open Claude Code in your own project and paste the **Contribute back** prompt from the
+[README](README.md#one-prompt-away). It drafts the contribution to these rules, keeps your project private and
+asks you before it forks, pushes or opens the pull request.
+
 ## What you can contribute
 | You have | Put it in |
 |---|---|

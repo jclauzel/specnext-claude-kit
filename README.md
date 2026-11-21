@@ -8,6 +8,29 @@ It is two things in one repository:
 - a **CLAUDE.md library**: snippets to paste into your own `CLAUDE.md`, whole templates per project type, and
   community examples.
 
+## One prompt away
+Open Claude Code in your own game's folder and paste one of these.
+
+**Use the kit:** see what fits your project, and get the changes offered to you.
+```text
+Look at https://github.com/jclauzel/specnext-claude-kit and compare it with this project: my CLAUDE.md files,
+my build scripts and toolchain, the platform I target (Spectrum Next, classic Spectrum or both), my assembly and
+how I test (emulators, real hardware). Tell me which of its plugins, skills, CLAUDE.md snippets and templates
+would help me and why, and which would not. Then offer me the concrete changes: the install commands, and the
+edits to my CLAUDE.md as a diff. Change nothing until I say yes to each one.
+```
+
+**Contribute back:** turn what you have learned into a pull request.
+```text
+Look at this project's CLAUDE.md files, Claude skills and helper tools, and at
+https://github.com/jclauzel/specnext-claude-kit (read its CONTRIBUTING.md first). Find what I have that the kit
+does not, and draft a contribution: a plugin under plugins/community/<my-github-name>-<topic>/ and/or CLAUDE.md
+snippets, made generic so they work for anyone's project. Keep my privacy: leave out my game's name, code, art,
+story and unreleased details, any personal or absolute paths, emails, names I have not made public, keys, tokens
+and anything I mark private; only measured claims, each with what it was tested on. Run its tools/validate.py.
+Show me every file and the full diff, and ask me before you fork, push or open the pull request.
+```
+
 ## Install in two commands
 ```sh
 claude plugin marketplace add jclauzel/specnext-claude-kit
