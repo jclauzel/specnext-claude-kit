@@ -61,6 +61,51 @@ session. You do not call a skill by name: Claude loads it by itself when your ta
 it", "how much room is left", "time it on MAME"). To run one on purpose, type its plugin and skill name as a
 command, for example `/zxnext-core:zxnext-build` or `/z80-common:z80-measure`.
 
+## How it works, and what it changes in your setup
+Know what you are adding before you install it.
+
+**What installing does**
+- Claude Code copies the plugins you install into its own plugin folder (under `~/.claude/plugins`). Nothing is copied
+  into your projects.
+- By default a plugin is installed for you (user scope), so it is available in **every** project you open. To keep it to
+  one project, install it from that project with `--scope project` (shared with the repository through its
+  `.claude/settings.json`) or `--scope local` (only you).
+
+**What it never does**
+- It never edits your code, your `CLAUDE.md`, your settings or any file by itself, and it has no hooks or background
+  scripts: nothing runs when a session starts, and the kit makes no network calls. The skills are instructions Claude
+  reads; Claude still asks before acting, as your permission settings say.
+- The `claude-md/` snippets and templates are not installed: they only change your `CLAUDE.md` if you copy them in.
+- `zxnext-unite-mcp` is the one plugin that adds tools: a connection to the ZX-Next-Unite app on your own PC
+  (`127.0.0.1`). It does something only when the app is running and Claude uses one of its tools.
+
+**How a skill loads (and what it costs)**
+Claude reads each installed skill's name and one-line description at the start of every session, so it knows the skill
+exists; the rest of the skill loads only when your task matches (or when you run it as `/plugin:skill`), and a skill's
+`references/` files only when it needs them. Estimates, at about 4 characters a token:
+
+| Plugin | Always in context (every session) | When a skill is used |
+|---|---|---|
+| `zxnext-core` (4 skills) | about 760 tokens | about 900-1 500 per skill, plus 600-750 if it reads its reference |
+| `z80-common` (2 skills) | about 230 tokens | about 650-900 per skill |
+| `zx-classic` (1 skill) | about 150 tokens | about 1 450 |
+| `zxnext-unite-mcp` | the names of its tools (a few hundred tokens); each tool's details load only when used | the tool calls you make |
+
+So the Next set (`zxnext-core` and `z80-common`) adds about 1 000 tokens to every session, and a skill in use adds one
+to two thousand more for that task. After installing, `claude plugin details zxnext-core@specnext-claude-kit` shows the
+projected cost on your machine, and `/context` in a session shows what is loaded right now.
+
+**Can it interfere with what I already have?**
+- **Skills load on matching tasks, in every project** (user scope): a Z80 or emulator task in another project may load
+  them too. If that is not wanted, install with `--scope project`, or `claude plugin disable` it where you do not
+  want it.
+- **Your `CLAUDE.md` is your project's rule.** If a skill's advice differs from it (another build system, another
+  budget, another emulator), say which wins in your `CLAUDE.md` and Claude follows it.
+- **Overlapping skills:** if you already have your own skill for the same job, keep one (`/doctor` finds unused ones),
+  or Claude may read both.
+- **Nothing to undo but the install:** disable or uninstall a plugin (below) and it stops loading; nothing else was
+  changed.
+
 ## Updating the kit and your plugins
 When a new release is out (see [Releases](https://github.com/jclauzel/specnext-claude-kit/releases)), two steps:
 
