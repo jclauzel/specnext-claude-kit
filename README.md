@@ -73,10 +73,12 @@ Pull requests are welcome: a new skill, a fix, a measurement, your `CLAUDE.md`. 
 then run the checks locally before you open the pull request:
 
 ```sh
-python tools/validate.py
+python tools/validate.py              # Python 3.9+ with PyYAML
+pwsh -File tools/validate.ps1         # or PowerShell 7, no Python needed
 ```
 
-The same checks run on every pull request.
+On Windows without PowerShell 7, `powershell -ExecutionPolicy Bypass -File tools\validate.ps1` runs the
+same checks in the PowerShell built into Windows. Both run on every pull request.
 
 ## Licence
 MIT, see [LICENSE](LICENSE). Not affiliated with Anthropic or with SpecNext Ltd.

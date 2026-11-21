@@ -36,6 +36,8 @@ A skill that proves itself in the community folder can later move into one of th
 ## Before you open a pull request
 ```sh
 python tools/validate.py              # needs Python 3.9+ and PyYAML (pip install pyyaml)
+pwsh -File tools/validate.ps1         # or the same checks in PowerShell 7, no Python needed
+powershell -ExecutionPolicy Bypass -File tools\validate.ps1   # or Windows PowerShell 5.1, built into Windows
 claude plugin validate .              # optional, if you have Claude Code
 claude --plugin-dir plugins/<yours>   # optional: try the skill in a session
 ```

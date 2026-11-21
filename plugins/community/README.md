@@ -22,7 +22,8 @@ Your own skills, packaged as a plugin under `plugins/community/<author>-<topic>/
    }
    ```
 
-6. Run `python tools/validate.py` (and `claude plugin validate .` if you have Claude Code), then open a pull request.
+6. Run `python tools/validate.py` or `tools/validate.ps1` (PowerShell, no Python needed), and `claude plugin
+   validate .` if you have Claude Code, then open a pull request.
 
 ## Rules
 - Nothing private: no personal paths, no email addresses, no tokens, no project names you cannot share.
