@@ -31,14 +31,33 @@ and anything I mark private; only measured claims, each with what it was tested 
 Show me every file and the full diff, and ask me before you fork, push or open the pull request.
 ```
 
+## Which plugins do I need?
+| You are... | Install | Why |
+|---|---|---|
+| writing for the **Spectrum Next** (C, asm or both) | `zxnext-core` and `z80-common` | the Next skills; `zxnext-core` refers to `z80-common`'s measuring |
+| using the **ZX-Next-Unite** app, or want Claude to start MAME / CSpect or reach a real Next | add `zxnext-unite-mcp` | a connection to the app (an MCP server), not skills: the app must be running |
+| writing for the **classic 48K / 128K Spectrum** | `zx-classic` and `z80-common` | the classic machine's map and timing, plus Z80 measuring |
+| writing Z80 for **any other machine** | `z80-common` | measuring T-states and laying out code, for any Z80 |
+
+The plugins in short:
+- **`z80-common`** is the shared base: how to measure bytes and T-states instead of guessing, and how to lay out
+  branches. Every other plugin builds on it.
+- **`zxnext-core`** is the Spectrum Next: building with z88dk `+zxn` (the .nex, room per page, build switches, a build
+  table), proving and timing on MAME safely, and writing Z80N first.
+- **`zxnext-unite-mcp`** adds tools rather than knowledge: it lets Claude drive the ZX-Next-Unite app (load a disk
+  image, put files on it, start MAME or CSpect, push a build to a real Next). See its README to enable the app's server.
+- **`zx-classic`** is the classic Spectrum: the memory map, the screen layout, 128K paging and contended memory.
+
 ## Install in two commands
 ```sh
 claude plugin marketplace add jclauzel/specnext-claude-kit
 claude plugin install zxnext-core@specnext-claude-kit
 ```
-Then install whichever other plugins you want (`z80-common@specnext-claude-kit`, `zx-classic@specnext-claude-kit`,
-`zxnext-unite-mcp@specnext-claude-kit`), or browse them with `/plugin` inside a session. Skills load on their own
-when a task matches, or run them as `/zxnext-core:zxnext-build` and so on.
+Then add the others the table above says you need, the same way (`z80-common@specnext-claude-kit`,
+`zx-classic@specnext-claude-kit`, `zxnext-unite-mcp@specnext-claude-kit`), or browse them with `/plugin` inside a
+session. You do not call a skill by name: Claude loads it by itself when your task matches its description ("build
+it", "how much room is left", "time it on MAME"). To run one on purpose, type its plugin and skill name as a
+command, for example `/zxnext-core:zxnext-build` or `/z80-common:z80-measure`.
 
 ## Platforms and plugins
 | Plugin | Platform | Skills | What it gives you |
