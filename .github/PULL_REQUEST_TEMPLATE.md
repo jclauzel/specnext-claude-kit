@@ -5,6 +5,8 @@
 <!-- Machine or emulator and version, core, toolchain and version. Write "untested" if it is. -->
 
 ## Checklist
+- [ ] I checked the existing plugins, snippets and open pull requests: this is not a duplicate (or it improves an
+      existing one, named here)
 - [ ] I ran `/doctor` in my project first (recommended, optional)
 - [ ] `python tools/validate.py` (or `tools/validate.ps1` in PowerShell) passes
 - [ ] Nothing private: no personal paths, email addresses, tokens, or names and hashes from private projects

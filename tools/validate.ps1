@@ -7,7 +7,8 @@
       pwsh -File tools/validate.ps1                                    (PowerShell 7 on Windows, macOS or Linux)
 
   Checks:
-    - every SKILL.md starts with frontmatter holding `name` (equal to its folder) and `description`;
+    - every SKILL.md starts with frontmatter holding `name` (equal to its folder) and `description`, and no two
+      skills share a name, even in different plugins;
     - .claude-plugin/marketplace.json and every plugin.json parse, and they agree: every listed plugin exists, has a
       plugin.json with the same name, and names are unique; every .mcp.json parses;
     - no absolute personal paths, no email addresses, no tokens or keys (simple patterns);
@@ -195,8 +196,14 @@ function Test-TextFile([string]$Path, [string]$Text) {
 
 # ---------------------------------------------------------------- skills
 
+$script:SkillNames = @{}
+
 function Test-Skill([string]$Path, [string]$Text) {
     $folder = Split-Path -Leaf (Split-Path -Parent $Path)
+    if ($script:SkillNames.ContainsKey($folder)) {
+        Add-Problem $Path ("skill name ``$folder`` is already used by $(Get-Rel $script:SkillNames[$folder]): " +
+            'improve that skill or choose another name')
+    } else { $script:SkillNames[$folder] = $Path }
     $front = (Split-Frontmatter $Text)[0]
     if ($null -eq $front) { Add-Problem $Path 'SKILL.md must start with YAML frontmatter between --- lines'; return }
     try { $data = ConvertFrom-Frontmatter $front }

@@ -7,6 +7,22 @@ The quickest way: open Claude Code in your own project and paste the **Contribut
 [README](README.md#one-prompt-away). It drafts the contribution to these rules, keeps your project private and
 asks you before it forks, pushes or opens the pull request.
 
+## First, check it is not there already
+Before you build anything, make sure nobody has shared it, or is sharing it right now:
+- **What is merged:** the plugin table in the [README](README.md#platforms-and-plugins), `plugins/community/`,
+  `claude-md/snippets/` and `claude-md/templates/`, and `docs/z80n-measured.md` for measurements.
+- **What is in progress:** the open pull requests and issues, on GitHub or from a terminal:
+  ```sh
+  gh pr list -R jclauzel/specnext-claude-kit --state all --search "<topic>"
+  gh issue list -R jclauzel/specnext-claude-kit --state all --search "<topic>"
+  ```
+- **If yours overlaps something, improve that one** (a fix, a measurement, another machine or toolchain it was tested
+  on) instead of adding a second version of it.
+- **For anything big, open an issue first** ("I would like to add ...") so two people do not build the same thing, and
+  others can say what they would need from it.
+
+The checks also refuse two skills with the same name, even in different plugins.
+
 ## What you can contribute
 | You have | Put it in |
 |---|---|

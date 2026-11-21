@@ -24,8 +24,10 @@ edits to my CLAUDE.md as a diff. Change nothing until I say yes to each one.
 trims and checks your `CLAUDE.md` files and skills, so what you share is lean and loads (see CONTRIBUTING.md).
 ```text
 Look at this project's CLAUDE.md files, Claude skills and helper tools, and at
-https://github.com/jclauzel/specnext-claude-kit (read its CONTRIBUTING.md first). Find what I have that the kit
-does not, and draft a contribution: a plugin under plugins/community/<my-github-name>-<topic>/ and/or CLAUDE.md
+https://github.com/jclauzel/specnext-claude-kit (read its CONTRIBUTING.md first). Compare what I have with
+everything the kit already has, including its open pull requests and issues, and skip what is already covered;
+where mine overlaps an existing skill or snippet, propose an improvement to that one instead of a second version.
+For the rest, draft a contribution: a plugin under plugins/community/<my-github-name>-<topic>/ and/or CLAUDE.md
 snippets, made generic so they work for anyone's project. Keep my privacy: leave out my game's name, code, art,
 story and unreleased details, any personal or absolute paths, emails, names I have not made public, keys, tokens
 and anything I mark private; only measured claims, each with what it was tested on. Run its tools/validate.py.

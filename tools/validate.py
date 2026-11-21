@@ -4,7 +4,8 @@
     python tools/validate.py
 
 Checks:
-  - every SKILL.md starts with valid YAML frontmatter holding `name` (equal to its folder) and `description`;
+  - every SKILL.md starts with valid YAML frontmatter holding `name` (equal to its folder) and `description`, and no
+    two skills share a name, even in different plugins;
   - .claude-plugin/marketplace.json and every plugin.json parse, and they agree: every listed plugin exists, has a
     plugin.json with the same name, and names are unique; every .mcp.json parses;
   - no absolute personal paths, no email addresses, no tokens or keys (simple patterns);
@@ -149,8 +150,16 @@ def check_text_file(path, text):
 
 # ---------------------------------------------------------------- skills
 
+SKILL_NAMES = {}
+
+
 def check_skill(path, text):
     folder = os.path.basename(os.path.dirname(path))
+    if folder in SKILL_NAMES:
+        problem(path, f"skill name `{folder}` is already used by {rel(SKILL_NAMES[folder])}: "
+                      "improve that skill or choose another name")
+    else:
+        SKILL_NAMES[folder] = path
     frontmatter, _ = split_frontmatter(text)
     if frontmatter is None:
         problem(path, "SKILL.md must start with YAML frontmatter between --- lines")
