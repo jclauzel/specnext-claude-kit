@@ -8,7 +8,7 @@ The wiki says its T-states are based on limited testing and may not be accurate:
 |---|---|---|---|---|
 | `swapnib` | ED 23 | 2 | 8 | swap the nibbles of A |
 | `mirror a` | ED 24 | 2 | 8 | reverse the bits of A |
-| `test n` | ED 27 n | 3 | 11 | A AND n, flags only; z88dk-ticks counts 18 |
+| `test n` | ED 27 n | 3 | 11 | A AND n, flags only; 11 T measured on a KS3 (z88dk-ticks wrongly counts 18) |
 | `bsla de,b` | ED 28 | 2 | 8 | DE shifted left by B (low 5 bits) |
 | `bsra de,b` | ED 29 | 2 | 8 | arithmetic right |
 | `bsrl de,b` | ED 2A | 2 | 8 | logical right |
@@ -21,7 +21,7 @@ The wiki says its T-states are based on limited testing and may not be accurate:
 | `add hl,nn` | ED 34 lo hi | 4 | 16 | |
 | `add de,nn` | ED 35 lo hi | 4 | 16 | |
 | `add bc,nn` | ED 36 lo hi | 4 | 16 | |
-| `push nn` | ED 8A hi lo | 4 | 23 | operand high byte first |
+| `push nn` | ED 8A hi lo | 4 | 23 | operand high byte first; 23 T measured on a KS3 (MAME 0.289: 24) |
 | `outinb` | ED 90 | 2 | 16 | `outi` without decrementing B |
 | `nextreg n,n` | ED 91 reg val | 4 | 20 | write a Next register |
 | `nextreg n,a` | ED 92 reg | 3 | 17 | write A to a Next register |

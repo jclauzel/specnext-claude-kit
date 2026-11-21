@@ -16,12 +16,14 @@ Run: `python plugins/z80-common/skills/z80-measure/scripts/measure.py <files>` w
 | DE = D x E (8x8 unsigned) | shift-and-add loop: 16 bytes, 371 T (D=$5A, E=$C3) | `mul d,e`: 2 bytes, 8 T | 14 bytes, 363 T |
 | DE <<= 3 | `sla e / rl d` x 3: 12 bytes, 48 T | `ld b,3 / bsla de,b`: 4 bytes, 15 T | 8 bytes, 33 T |
 | push a constant | `ld hl,nn / push hl`: 4 bytes, 21 T | `push nn`: 4 bytes, 23 T | **loses** 2 T (keeps HL) |
-| test bits of A | `and n`: 2 bytes, 7 T | `test n`: 3 bytes, 18 T in ticks | **loses** 1 byte and 11 T (keeps A) |
+| test bits of A | `and n`: 2 bytes, 7 T | `test n`: 3 bytes, 11 T on hardware (18 in ticks) | **loses** 1 byte and 4 T (keeps A) |
 | common branch, 100 passes | taken `jr cc`: 9 bytes, 3202 T | falls through: 13 bytes, 2714 T | 488 T; costs 4 bytes here |
 
 Notes:
-- `test n`: ticks counts 18 T; the SpecNext wiki's table says 11 T. Even at 11 T it loses to `and n` (7 T, one byte
-  less) whenever A may be destroyed.
+- `test n`: ticks counts 18 T, which is wrong: a KS3 on core 3.03.03 measures 11 T, the SpecNext wiki's figure
+  (`examples/z80n-hw-timing`). Even at 11 T it loses to `and n` (7 T, one byte less) whenever A may be destroyed.
+- On that KS3, `push nn` measures 23 T (MAME 0.289 counts 24), and code running from $8000 up shows no wait states at
+  28 MHz, while MAME 0.289 adds one per memory read there: MAME's 28 MHz timings are an upper bound.
 - z88dk-ticks reads `push nn`'s operand low byte first; the Next stores it high byte first. The timing above is
   unaffected, but a harness that checks the pushed value must swap the operand.
 

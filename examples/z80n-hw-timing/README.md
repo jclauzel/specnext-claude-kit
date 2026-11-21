@@ -98,19 +98,29 @@ MAME's own Z80N timing is a model and may differ from the hardware.
 On MAME `test n` takes 11 T (the wiki's figure) and `push nn` 24 T (34 - 10 for `pop hl`; the wiki says 23). At
 28 MHz MAME adds one wait cycle to every memory read (each opcode, operand and stack read) and none to writes.
 
-### Next hardware (to fill in)
-Machine: ______ (KS1 / KS2 / KS3), core: ______, video: ______ Hz, frame lines: ______
+### Next hardware: KS3, core 3.03.03 (2026-11-21)
+Machine: KS3, core: 3.03.03, video: 50 Hz (311 lines a frame). The raw file is `results-ks3-3.03.03.txt`.
 
 | Block | 3.5 MHz T | 7 MHz T | 14 MHz T | 28 MHz T | 28 MHz cycles |
 |---|---|---|---|---|---|
-| `nop` | 4.0 | 4.0 | 4.0 | 4.0 | |
-| `and n` | | | | | |
-| `test n` | | | | | |
-| `push nn` + `pop hl` | | | | | |
-| `ld hl,nn` + `push hl` + `pop hl` | | | | | |
-| `add hl,a` | | | | | |
-| `mul d,e` | | | | | |
-| `ld e,a` + `ld d,0` + `add hl,de` | | | | | |
+| `nop` | 4.0 | 4.0 | 4.0 | 4.0 | 4.0 |
+| `and n` | 7.0 | 7.0 | 7.0 | 7.0 | 7.0 |
+| `test n` | 11.0 | 11.0 | 11.0 | 11.0 | 11.0 |
+| `push nn` + `pop hl` | 32.9 | 33.0 | 33.0 | 33.0 | 32.9 |
+| `ld hl,nn` + `push hl` + `pop hl` | 30.9 | 31.0 | 31.0 | 31.0 | 30.9 |
+| `add hl,a` | 8.0 | 8.0 | 8.0 | 8.0 | 8.0 |
+| `mul d,e` | 8.0 | 8.0 | 8.0 | 8.0 | 8.0 |
+| `ld e,a` + `ld d,0` + `add hl,de` | 22.0 | 22.0 | 22.0 | 22.0 | 21.9 |
+
+What the hardware says:
+- **`test n` is 11 T** (the SpecNext wiki is right; z88dk-ticks' 18 T is wrong). It still loses to `and n` (7 T, one
+  byte less) whenever A may be destroyed.
+- **`push nn` is 23 T** (33 - 10 for `pop hl`; the wiki's figure; MAME counts 24). `ld hl,nn / push hl` (21 T) still
+  wins by 2 T when HL is free.
+- **No wait states at 28 MHz** for this code (it runs from $8000 up): every block takes the same cycles at every speed.
+  MAME 0.289 adds one wait cycle to every memory read at 28 MHz, so MAME overstates the time of 28 MHz code; frame
+  timings measured on MAME are a safe upper bound for this core.
+- `add hl,a` (8 T) and `mul d,e` (8 T) are exactly as the tables say.
 
 ## Files
 - `z80ntime.c`: the driver (speeds, the arithmetic, the screen, the results file).

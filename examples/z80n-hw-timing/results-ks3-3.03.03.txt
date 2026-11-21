@@ -1,0 +1,41 @@
+"z80ntime: Z80N T-states measured by raster lines, relative to nop = 4 T"
+core,3.03.03
+frame_lines,311
+block_repeats,500
+mhz,instruction,loops,lines_net,t_states,cycles_vs_3.5mhz_nop
+3.5,"empty block (call+ret+line read)",64,91,,
+3.5,"nop",64,563,4.0,4.0
+3.5,"and n",64,984,7.0,7.0
+3.5,"test n",64,1546,11.0,11.0
+3.5,"push nn + pop hl",64,4636,32.9,32.9
+3.5,"ld hl,nn + push hl + pop hl",64,4355,30.9,30.9
+3.5,"add hl,a",64,1124,8.0,8.0
+3.5,"mul d,e",64,1124,8.0,8.0
+3.5,"ld e,a + ld d,0 + add hl,de",64,3091,22.0,22.0
+7,"empty block (call+ret+line read)",128,92,,
+7,"nop",128,561,4.0,4.0
+7,"and n",128,982,7.0,7.0
+7,"test n",128,1544,11.0,11.0
+7,"push nn + pop hl",128,4633,33.0,32.9
+7,"ld hl,nn + push hl + pop hl",128,4352,31.0,30.9
+7,"add hl,a",128,1123,8.0,8.0
+7,"mul d,e",128,1123,8.0,8.0
+7,"ld e,a + ld d,0 + add hl,de",128,3089,22.0,21.9
+14,"empty block (call+ret+line read)",256,92,,
+14,"nop",256,561,4.0,4.0
+14,"and n",256,982,7.0,7.0
+14,"test n",256,1544,11.0,11.0
+14,"push nn + pop hl",256,4632,33.0,32.9
+14,"ld hl,nn + push hl + pop hl",256,4351,31.0,30.9
+14,"add hl,a",256,1123,8.0,8.0
+14,"mul d,e",256,1123,8.0,8.0
+14,"ld e,a + ld d,0 + add hl,de",256,3088,22.0,21.9
+28,"empty block (call+ret+line read)",512,92,,
+28,"nop",512,561,4.0,4.0
+28,"and n",512,982,7.0,7.0
+28,"test n",512,1544,11.0,11.0
+28,"push nn + pop hl",512,4632,33.0,32.9
+28,"ld hl,nn + push hl + pop hl",512,4351,31.0,30.9
+28,"add hl,a",512,1123,8.0,8.0
+28,"mul d,e",512,1123,8.0,8.0
+28,"ld e,a + ld d,0 + add hl,de",512,3088,22.0,21.9

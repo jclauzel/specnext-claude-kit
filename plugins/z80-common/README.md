@@ -32,8 +32,8 @@ Install: `claude plugin install z80-common@specnext-claude-kit`. The skills run 
 | `branch-taken` (100 passes) | 9 | 3202 |
 | `branch-fallthrough` (100 passes) | 13 | 2714 |
 
-`test n`: z88dk-ticks counts 18 T, while the SpecNext wiki's table gives 11 T. One of them is wrong; until someone
-measures it on a Next, treat both figures as unconfirmed. Either way it loses to `and n` when A may be destroyed.
+`test n`: z88dk-ticks counts 18 T, but a KS3 on core 3.03.03 measures 11 T, the SpecNext wiki's figure
+(`examples/z80n-hw-timing`): trust 11 T, not ticks. Either way it loses to `and n` when A may be destroyed.
 
 ## Contributing
 Add a snippet pair to `skills/z80-measure/examples/` with both figures in this table, and say what you ran it on.

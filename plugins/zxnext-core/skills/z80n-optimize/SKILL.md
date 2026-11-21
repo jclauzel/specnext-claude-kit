@@ -53,4 +53,4 @@ Do not change working code for it unless the user asks or it is part of the task
 ## z88dk notes
 - `+zxn` targets assemble every instruction above; for a plain `+z80` build pass `-mz80n` to the assembler.
 - `z88dk-ticks -mz80n` counts Z80N cycles, but reads `push nn`'s operand in the wrong byte order (the timing is
-  right, the value is swapped). Its count for `test n` (18 T) disagrees with the wiki table (11 T): unconfirmed.
+  right, the value is swapped). Its count for `test n` (18 T) is wrong: a KS3 (core 3.03.03) measures 11 T, the wiki's.
