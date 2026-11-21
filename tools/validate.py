@@ -22,7 +22,8 @@ import sys
 try:
     import yaml
 except ImportError:
-    sys.exit("validate.py: PyYAML is required (python -m pip install pyyaml)")
+    sys.exit("validate.py: PyYAML is required: run  python -m pip install pyyaml  (macOS/Linux: python3 -m pip "
+             "install --user pyyaml, or your system's python3-yaml package), or use tools/validate.ps1 instead")
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MAX_MD_LINE = 120

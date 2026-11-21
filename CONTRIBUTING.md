@@ -35,12 +35,25 @@ A skill that proves itself in the community folder can later move into one of th
 
 ## Before you open a pull request
 ```sh
-python tools/validate.py              # needs Python 3.9+ and PyYAML (pip install pyyaml)
+python tools/validate.py              # needs Python 3.9+ and PyYAML (see below)
 pwsh -File tools/validate.ps1         # or the same checks in PowerShell 7, no Python needed
 powershell -ExecutionPolicy Bypass -File tools\validate.ps1   # or Windows PowerShell 5.1, built into Windows
 claude plugin validate .              # optional, if you have Claude Code
 claude --plugin-dir plugins/<yours>   # optional: try the skill in a session
 ```
+
+To run the Python version you need Python 3.9 or later and its YAML library, PyYAML, installed once:
+
+```sh
+python -m pip install pyyaml          # Windows (use "py -m pip install pyyaml" if "python" is not found)
+python3 -m pip install --user pyyaml  # macOS and Linux
+```
+
+If pip refuses with "externally managed environment" (recent Linux and Homebrew Pythons), use your system's package
+(`sudo apt install python3-yaml` on Debian or Ubuntu, `sudo dnf install python3-pyyaml` on Fedora) or a virtual
+environment (`python3 -m venv .venv`, then `.venv/bin/pip install pyyaml` and `.venv/bin/python tools/validate.py`).
+Check it with `python -c "import yaml; print(yaml.__version__)"`. No Python? Use the PowerShell version: same checks.
+
 Fill in the pull request template. One topic per pull request keeps reviews quick.
 
 ## Reviews

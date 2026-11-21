@@ -92,12 +92,24 @@ Pull requests are welcome: a new skill, a fix, a measurement, your `CLAUDE.md`. 
 then run the checks locally before you open the pull request:
 
 ```sh
-python tools/validate.py              # Python 3.9+ with PyYAML
+python tools/validate.py              # Python 3.9+ with PyYAML (installing it: below)
 pwsh -File tools/validate.ps1         # or PowerShell 7, no Python needed
 ```
 
 On Windows without PowerShell 7, `powershell -ExecutionPolicy Bypass -File tools\validate.ps1` runs the
 same checks in the PowerShell built into Windows. Both run on every pull request.
+
+To run the Python version you need Python 3.9 or later and its YAML library, PyYAML, installed once:
+
+```sh
+python -m pip install pyyaml          # Windows (use "py -m pip install pyyaml" if "python" is not found)
+python3 -m pip install --user pyyaml  # macOS and Linux
+```
+
+If pip refuses with "externally managed environment" (recent Linux and Homebrew Pythons), use your system's package
+(`sudo apt install python3-yaml` on Debian or Ubuntu, `sudo dnf install python3-pyyaml` on Fedora) or a virtual
+environment (`python3 -m venv .venv`, then `.venv/bin/pip install pyyaml` and `.venv/bin/python tools/validate.py`).
+Check it with `python -c "import yaml; print(yaml.__version__)"`. No Python? Use the PowerShell version: same checks.
 
 ## Licence
 MIT, see [LICENSE](LICENSE). Not affiliated with Anthropic or with SpecNext Ltd.
