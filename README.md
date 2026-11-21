@@ -20,7 +20,8 @@ would help me and why, and which would not. Then offer me the concrete changes: 
 edits to my CLAUDE.md as a diff. Change nothing until I say yes to each one.
 ```
 
-**Contribute back:** turn what you have learned into a pull request.
+**Contribute back:** turn what you have learned into a pull request. Tip: run `/doctor` in your project first; it
+trims and checks your `CLAUDE.md` files and skills, so what you share is lean and loads (see CONTRIBUTING.md).
 ```text
 Look at this project's CLAUDE.md files, Claude skills and helper tools, and at
 https://github.com/jclauzel/specnext-claude-kit (read its CONTRIBUTING.md first). Find what I have that the kit

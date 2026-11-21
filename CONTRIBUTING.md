@@ -34,6 +34,15 @@ A skill that proves itself in the community folder can later move into one of th
    `description`; `plugin.json` and the marketplace entry agree.
 
 ## Before you open a pull request
+**First, recommended: run `/doctor`** in a Claude Code session in your project. On recent Claude Code it health-checks
+your setup: it trims your `CLAUDE.md` files down to what a session cannot work out from your code, removes
+duplicated or contradicting guidance, flags skill frontmatter that does not parse (a skill whose frontmatter is
+broken loads with every field dropped) and finds unused skills and plugins. It proposes each change and asks before
+it applies any; accept the ones you agree with. Lean `CLAUDE.md` files and skills that load make better
+contributions and quicker reviews. Older Claude Code has a simpler `/doctor` (installation diagnostics), and
+`claude doctor` in a terminal prints the install and settings checks. It is good practice, not a required step.
+
+Then run the checks:
 ```sh
 python tools/validate.py              # needs Python 3.9+ and PyYAML (see below)
 pwsh -File tools/validate.ps1         # or the same checks in PowerShell 7, no Python needed

@@ -5,6 +5,7 @@
 <!-- Machine or emulator and version, core, toolchain and version. Write "untested" if it is. -->
 
 ## Checklist
+- [ ] I ran `/doctor` in my project first (recommended, optional)
 - [ ] `python tools/validate.py` (or `tools/validate.ps1` in PowerShell) passes
 - [ ] Nothing private: no personal paths, email addresses, tokens, or names and hashes from private projects
 - [ ] Claims of "faster" or "smaller" give bytes and T-states and say how they were measured
