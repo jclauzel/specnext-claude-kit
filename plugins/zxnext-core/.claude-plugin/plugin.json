@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "ZX Spectrum Next: building with z88dk +zxn, proving builds on MAME, Z80N optimisation",
   "author": {
-    "name": "Julien Clauzel and contributors",
+    "name": "jclauzel and contributors",
     "url": "https://github.com/jclauzel"
   },
   "license": "MIT",

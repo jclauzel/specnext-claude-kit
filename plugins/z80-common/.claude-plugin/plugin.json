@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Shared by every Z80 machine: measuring bytes and T-states with z88dk-ticks, and code layout",
   "author": {
-    "name": "Julien Clauzel and contributors",
+    "name": "jclauzel and contributors",
     "url": "https://github.com/jclauzel"
   },
   "license": "MIT",

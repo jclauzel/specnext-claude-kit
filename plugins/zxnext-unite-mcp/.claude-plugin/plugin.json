@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Connects Claude Code to the ZX-Next-Unite app's MCP server (disk images, MAME, CSpect, real Nexts)",
   "author": {
-    "name": "Julien Clauzel and contributors",
+    "name": "jclauzel and contributors",
     "url": "https://github.com/jclauzel"
   },
   "homepage": "https://github.com/jclauzel/ZX-Next-Unite",

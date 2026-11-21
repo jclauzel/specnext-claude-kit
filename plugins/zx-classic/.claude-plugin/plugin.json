@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Classic 48K/128K ZX Spectrum: the memory map, screen layout, paging and contended memory",
   "author": {
-    "name": "Julien Clauzel and contributors",
+    "name": "jclauzel and contributors",
     "url": "https://github.com/jclauzel"
   },
   "license": "MIT",
