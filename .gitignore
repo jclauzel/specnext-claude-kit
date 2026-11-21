@@ -8,5 +8,6 @@
 *.png
 __pycache__/
 *.pyc
+examples/*/build/
 .claude/settings.local.json
 CLAUDE.local.md

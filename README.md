@@ -40,6 +40,11 @@ Each plugin's README says what it was tested on and marks what is untested.
 - [Writing a good skill](docs/writing-a-good-skill.md): frontmatter, descriptions that trigger, progressive disclosure.
 - [Z80N measured](docs/z80n-measured.md): measured wins and losses only, with bytes and T-states.
 
+## Examples
+- [`examples/z80n-hw-timing/`](examples/z80n-hw-timing/): `z80ntime.nex`, a Next program that measures Z80N
+  instruction T-states on the hardware by counting raster lines (`test n`, `push nn`, `add hl,a`, `mul d,e` against
+  their plain forms, at 3.5 to 28 MHz), shows a table and writes it to a CSV file on the SD card.
+
 ## Contribute
 Pull requests are welcome: a new skill, a fix, a measurement, your `CLAUDE.md`. Read [CONTRIBUTING.md](CONTRIBUTING.md),
 then run the checks locally before you open the pull request:
