@@ -38,6 +38,32 @@ frame-report builds on MAME and played on Next hardware.
 | `push nn` and `test n` | both lost to `ld hl,nn / push hl` and `and n` in that project's routines |
 | making the common branch of a per-frame walk fall through | about half a raster line a frame and 6 bytes saved, no instruction changed |
 
+## C against Z80N assembly, in an application (z88dk-ticks v0.14c beta, MAME 0.289)
+Reported by the maintainer from a z88dk `+zxn` application that draws its windows and text on Layer 2 from C (zsdcc
+`-SO3 --max-allocs-per-node200000 --opt-code-size`, z88dk nightly of 2026-08-10). The drawing routines were rewritten
+in Z80N assembly behind a build switch; both sides ran the same calls in `z88dk-ticks -mz80n`, from the project's own
+harness. These compare whole routines, compiled C against hand-written assembly, not one instruction against another.
+
+| Routine | C (T-states) | Assembly (T-states) | Faster by |
+|---|---|---|---|
+| 13 glyphs of 8x8 text | 320 011 | 69 864 | 4.6 |
+| 26 narrow glyphs in the 640-wide mode | 709 711 | 120 487 | 5.9 |
+| fill a 152 x 200 rectangle | 966 065 | 445 826 | 2.2 |
+| a horizontal line, 152 x 1 | 88 873 | 16 274 | 5.5 |
+| 20 lines of 31 glyphs | 19 571 529 | 2 943 169 | 6.6 |
+| copy a full-screen picture, row-major source to the column-major Layer 2 (inner loop: `ldws`) | 3 122 407 | 1 409 309 | 2.2 |
+| repaint the whole screen (640-wide mode) | 35 289 865 | 9 439 458 | 3.7 |
+
+Notes:
+- Why the C is slow: about 300 T-states a pixel in the glyph loop (8 arguments and 3 locals, each reached through
+  `(ix+d)`), and 585 T-states a pixel in a horizontal line drawn as one library call per column.
+- Page room was about neutral: the assembly routines are roughly the size of the C they replace.
+- On MAME 0.289 (`specnext_ks3`, 50 Hz, emulated frames from the screen's first change to its last) the whole-screen
+  repaint took 45-46 frames before and 15 after. The build was then used on Next hardware; no figures were taken
+  there.
+- The C figures for routines that format numbers are a little low: zsdcc emitted one `push nn`, which z88dk-ticks
+  does not execute as the Next does.
+
 ## Wanted
 Measurements of `ldirx` / `ldpirx` against plain copy loops, the DMA against `ldir` for large copies, `pixelad` /
 `pixeldn` against hand-written screen address code, and `nextreg` against `out` to $243B / $253B, ideally in lines

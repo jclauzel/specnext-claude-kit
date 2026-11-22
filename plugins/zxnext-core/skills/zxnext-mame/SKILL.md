@@ -54,6 +54,19 @@ control over keys, frames and logs.
   of 264 and no late frames) and report each level's worst against the previous step on the same keys, naming the
   frame of any change. MAME never sets the sprite overflow flag, so check that one on hardware.
 
+## Timing a program that has no frame loop (a tool, a menu, a file manager)
+When the question is "is this build quicker to use?", compare two builds on the same key and mouse schedule:
+- Snapshot every frame after each input and count the frames from the screen's **first change** to its last. Do not
+  count from the key: a program that acts on a key's release adds the whole hold (20-40 frames) to both builds.
+- Mask whatever moves by itself (a clock, an animated sprite, a cursor blink) before comparing frames.
+- The count is in emulated frames, so other work on the PC cannot move it. Wall time can: one project's build script
+  ran its compilers at high priority on every core and held a headless MAME under 1 % of a CPU (a 91-second run took
+  half an hour). Never time by the PC's clock.
+- An `-autoboot_delay` chosen to skip the boot can skip a screen entirely when the boot's own timing changes. Start the
+  script at 0, shoot the whole boot and find the screen by its pixels instead of predicting its frame.
+- Measured this way (MAME 0.289, 50 Hz), one application's full-screen repaint went from 45-46 frames to 15 between
+  two releases, and a cursor move from 3 frames to 2: a frame count cannot show a gain smaller than one frame.
+
 ## The phase rule
 Only compare runs whose program frame counters line up at the same point (for example each level's first frame). A
 run that is one frame out against the reference is repeated and named, never counted.

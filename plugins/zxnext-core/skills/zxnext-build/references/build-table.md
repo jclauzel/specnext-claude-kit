@@ -39,6 +39,14 @@ that writes even one file is a failure.
   `[A-Za-z0-9_~\-]*zcc[A-Za-z0-9_~\-]*|\\?Temp\\?\S*|/tmp/\S*`
 - Any other difference is a real difference: find its cause before going on.
 
+## When two .nex files differ: name the banks
+A changed byte's file offset says little; the 16 KB bank it lies in says which code moved. Decode it from the `.nex`
+itself: the header is 512 bytes, the bytes from offset 18 flag which of the banks 0-111 the file holds, and the banks
+follow the header (and the loading screen and palette, when the file has them) 16 384 bytes each in the format's own
+order: 5, 2, 0, then 1, 3, 4, 6, 7 and upwards. A comparison script can then pass a change that is confined to the
+banks you name (a fix inside one banked page) and fail one that also moved the main bank. One project's script does
+this for three flavours of a banked application; the layout above is the one it reads.
+
 ## What to report at the end of a step
 - The MD5 of each flavour (full in the project docs, the first 8 hex digits in prose) and which anchors matched.
 - Free bytes per flavour: the main bank and every page, before and after.

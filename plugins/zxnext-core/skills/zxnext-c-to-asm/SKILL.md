@@ -17,6 +17,14 @@ nearly a line of every frame, with nothing a player could see or hear changed. L
   calls per frame.
 - Rewrite the biggest per-frame routines first, a few at a time (one step), measuring after each. Leave one-time setup
   and title-screen-only code for last: they cost bytes but no frame time.
+- **Look for the cheaper exit first.** Slow code is not always slow instructions. In an application's window drag,
+  the cost was repainting rows that a clip then threw away: assembly drawing routines alone made that step 7 % faster,
+  and two early returns in the C made it 2.2 to 6.2 times faster (for example 17.75 M to 2.86 M T-states,
+  z88dk-ticks).
+- **What assembly buys depends on the routine's shape.** zsdcc reaches arguments and locals through `(ix+d)`: a glyph
+  loop with 8 arguments and 3 locals cost about 300 T-states a pixel. Rewritten, that application's text and fill
+  routines ran 1.7 to 6.6 times faster (z88dk-ticks, the shipped flags) but were about the size of the C. Expect time
+  from pixel loops, and bytes mostly from routines that carry call overhead and 16-bit bookkeeping.
 - **The stop rule:** if a routine's asm saves under 20 bytes and under 0.2 of a line on the worst frame, keep the C and
   say why with the numbers. Small helpers that only the rewritten routines call can move with them when that pays.
 
@@ -26,6 +34,10 @@ nearly a line of every frame, with nothing a player could see or hear changed. L
 - Keep zsdcc's interface exactly: the same calling convention (`__z88dk_fastcall` takes its argument in L or HL;
   other arguments on the stack), the registers each caller expects kept (with `-clib=sdcc_iy` the library owns **IY**:
   never touch it; say whether IX is used), the same signedness, carries and return registers.
+- IY is not a spare pair even where the compiled C never uses it: the ROM's IM 1 handler reads the system variables
+  through IY, and it runs whenever the program calls the OS. A routine that borrows IY passes every PC test and fails
+  in the field. Make the harness load IY (and IX) with a known value before each call and check it afterwards.
+- No alternate register set (`exx`, `ex af,af'`) unless the program's interrupt handler saves it.
 - The same calls in the same order: every bank door, every sound call, every helper. A rewrite changes how, never what.
 - Statics the asm must reach lose `static` only under the switch (a macro such as `OBJ_STATIC` that is `static` when the
   switch is 0), so the 0 build stays the old bytes.
@@ -49,7 +61,8 @@ nearly a line of every frame, with nothing a player could see or hear changed. L
   one: a harness that cannot fail proves nothing.
 - Count T-states in `z88dk-ticks` on recorded real states (a quiet frame, a busy frame, the heaviest event), C against
   asm, call included; report the medians. Mind ticks' quirks: it reads Z80N `push nn`'s operand in the wrong byte order
-  (swap it in the harness) and miscounts `test n` (18 T in ticks, 11 T on a real Next).
+  (swap it in the harness) and miscounts `test n` (18 T in ticks, 11 T on a real Next). For code that pages memory
+  or draws on Layer 2, read "Other ways z88dk-ticks is not a Next" in `z80-measure` before trusting a result.
 
 ## 5. One shared bank door instead of many
 - Programs that call code in other 16 KB pages often grow one small door function per page, each in C: map the page

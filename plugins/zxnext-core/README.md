@@ -23,6 +23,12 @@ skills refer to).
   T-state comparisons in the skill were checked with `z88dk-ticks -mz80n` (see `z80-common`'s README). The "lost in
   one project" and "half a line a frame" notes are measurements from that game project on MAME.
 
+- **Added in 0.2.1, from a second project** (a z88dk `+zxn` application with banked code pages, z88dk nightly of
+  2026-08-10, z88dk-ticks v0.14c beta, MAME 0.289, run on an N-Go, a KS2 and a KS3): in `zxnext-build`, the
+  `-startup=31` figure, the pinned toolchain, the zsdcc flag pair and the two-compiler test rounds, stale objects, and
+  naming the banks in which two `.nex` files differ; in `zxnext-c-to-asm`, the early-exit and routine-shape notes and
+  the IY rule; in `zxnext-mame`, timing a program that has no frame loop. The figures are that project's.
+
 ## Not here (yet)
 - sjasmplus-based builds: contributions welcome (see `claude-md/templates/next-sjasmplus-asm.md` for a starting point).
 - CSpect-based proofs: the ZX-Next-Unite plugin can start CSpect; a timing skill for it would be welcome.

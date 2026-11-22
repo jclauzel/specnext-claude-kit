@@ -1,6 +1,6 @@
 {
   "name": "z80-common",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Shared by every Z80 machine: measuring bytes and T-states with z88dk-ticks, and code layout",
   "author": {
     "name": "jclauzel and contributors",
