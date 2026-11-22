@@ -1,0 +1,11 @@
+{
+  "name": "jclauzel-z88dk-banked-c",
+  "version": "0.1.0",
+  "description": "z88dk C programs with banked code pages on the Next: where the bytes go, and keeping banked code safe",
+  "author": {
+    "name": "jclauzel",
+    "url": "https://github.com/jclauzel"
+  },
+  "license": "MIT",
+  "keywords": ["zx-spectrum-next", "z88dk", "zsdcc", "banking", "memory"]
+}

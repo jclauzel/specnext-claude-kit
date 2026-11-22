@@ -33,6 +33,13 @@
       "description": "Classic 48K/128K ZX Spectrum: the memory map, screen layout, paging and contended memory",
       "category": "zx-spectrum",
       "tags": ["zx-spectrum", "48k", "128k", "z80", "contended-memory"]
+    },
+    {
+      "name": "jclauzel-z88dk-banked-c",
+      "source": "./plugins/community/jclauzel-z88dk-banked-c",
+      "description": "z88dk C programs with banked code pages on the Next: where the bytes go, and keeping banked code safe",
+      "category": "zx-spectrum-next",
+      "tags": ["zx-spectrum-next", "z88dk", "zsdcc", "banking", "memory"]
     }
   ]
 }
