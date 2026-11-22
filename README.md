@@ -11,7 +11,8 @@ It is two things in one repository:
 ## One prompt away
 Open Claude Code in your own game's folder and paste one of these.
 
-**Use the kit:** see what fits your project, and get the changes offered to you.
+**Use the kit:** see what fits your project, and get the changes offered to you. Commit your project first, so every
+change it makes shows in `git diff` and can be undone (see "Install in two commands").
 ```text
 Look at https://github.com/jclauzel/specnext-claude-kit and compare it with this project: my CLAUDE.md files,
 my build scripts and toolchain, the platform I target (Spectrum Next, classic Spectrum or both), my assembly and
@@ -53,6 +54,12 @@ The plugins in short:
 - **`zx-classic`** is the classic Spectrum: the memory map, the screen layout, 128K paging and contended memory.
 
 ## Install in two commands
+**Before you start, take a backup.** Installing a plugin writes nothing into your project (see below), but the steps
+around it can: the **Use the kit** prompt edits your `CLAUDE.md`, and `/doctor` (after installing) can trim your
+`CLAUDE.md` files and skills. So first commit your project (`git status` clean, ideally pushed), or copy its folder if
+it is not in git, and copy your own `~/.claude/CLAUDE.md`, `~/.claude/skills/` and `~/.claude/settings.json` if you
+have them. Then any change you regret is one `git checkout` or one copy away.
+
 ```sh
 claude plugin marketplace add jclauzel/specnext-claude-kit
 claude plugin install zxnext-core@specnext-claude-kit
@@ -62,6 +69,13 @@ Then add the others the table above says you need, the same way (`z80-common@spe
 session. You do not call a skill by name: Claude loads it by itself when your task matches its description ("build
 it", "how much room is left", "time it on MAME"). To run one on purpose, type its plugin and skill name as a
 command, for example `/zxnext-core:zxnext-build` or `/z80-common:z80-measure`.
+
+**After installing, tidy up with `/doctor`.** Start a new session in your project and run `/doctor`. On recent Claude
+Code it checks your `CLAUDE.md` files and skills next to the ones you just installed: a skill of your own that now
+does the same job as a kit skill, `CLAUDE.md` lines the kit's skills now cover, unused skills. It asks before changing
+anything; review each change with `git diff` and keep your project's rules where they differ from the kit (see "Can it
+interfere" below). Run it again in each project where you use the kit, and after a big kit update. Older Claude Code
+has a simpler `/doctor` (installation checks only); then compare by hand, or paste the **Use the kit** prompt.
 
 ## How it works, and what it changes in your setup
 Know what you are adding before you install it.
