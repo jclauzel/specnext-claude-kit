@@ -14,6 +14,8 @@ Install: `claude plugin install z80-common@specnext-claude-kit`. The skills run 
 - `scripts/measure.py` and every file in `skills/z80-measure/examples/`: run with z88dk's `z88dk-z80asm` and
   `z88dk-ticks` v0.14c beta (`-mz80n` and `-mz80`), Python 3.14, on Windows. The figures below are that run's output.
 - The harness advice and the `push nn` quirk: from a z88dk `+zxn` game project's C-against-asm harnesses.
+- "Other ways z88dk-ticks is not a Next": from a second z88dk `+zxn` project's harness for its Layer 2 drawing
+  routines (7 784 cases, 26 planted faults), z88dk-ticks v0.14c beta and zsdcc from the z88dk nightly of 2026-08-10.
 - Not tested: macOS and Linux (the script uses only the standard library and should work there).
 
 ## Measured examples (`python scripts/measure.py examples/*.asm`)

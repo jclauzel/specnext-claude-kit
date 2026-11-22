@@ -56,6 +56,24 @@ first** (it is the only big-endian operand in the Z80N set). The timing is right
 byte-swapped. In a harness, swap those operands (or avoid `push nn` in the code under test), or the C side will
 "fail" where the hardware is right.
 
+## Other ways z88dk-ticks is not a Next (harnesses for `+zxn` code)
+Each of these made a C-against-asm harness pass or fail for the wrong reason (z88dk-ticks v0.14c beta, zsdcc from the
+z88dk nightly of 2026-08-10):
+- **zsdcc emits `push nn` by itself.** The C side of a harness can hold one without any assembly of yours: in one
+  routine the constant divisor of a 32-bit division was pushed that way, and under ticks the unchanged C printed a
+  wrong result. Before trusting C under ticks, list it (`zcc ... -a`) and search the listing for `push` with an
+  immediate operand; where there is one, compare against a copy of the C with that constant in a `volatile`.
+- **ticks pages memory on a `nextreg` write to an MMU register.** A C stub that swallows the register write and an
+  assembly routine that executes a real `nextreg` then read different pages. In one harness both sides copied zeros
+  and two planted faults went unnoticed. Give both sides the same paging: both real, or both stubbed.
+- **There is no Layer 2.** $0000-$3FFF is flat memory and every Layer 2 bank is the same bytes. A harness for
+  drawing code has to model port $123B itself and compare each byte written together with the bank and the port value
+  it was written under.
+- **Marker labels must be assembly labels.** Two empty C functions used as `-start` and `-end` markers were folded
+  onto one address.
+- **Mutation rounds.** In the same harness, 26 planted faults took three rounds of new cases before every one was
+  caught. Clipping edges were the survivors: step them one column at a time.
+
 ## Reporting a change
 Give, for each change: the old and new form, bytes before and after, T-states before and after (with the level of
 evidence), and the effect per frame when the code runs every frame (T-states times calls per frame, and lines when

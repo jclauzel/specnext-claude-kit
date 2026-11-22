@@ -17,6 +17,22 @@ build script, refined over many milestones. They apply to any Next project; repl
 - Compile: `zcc +zxn -c <flags> [--codesegPAGE_nn] -pragma-include:<zpragma.inc> -o <obj> <src>`.
   Link: `zcc +zxn -startup=31 <flags> -pragma-include:<zpragma.inc> -subtype=nex -Cz--clean -create-app -m -o <name>
   <objs>`. `-m` writes the `.map`; every room check and every emulator log reader needs it: keep it beside the `.nex`.
+- `-startup=31` is the CRT with no console driver: a program that draws its own screen needs no other, and one
+  application got about 3.3 KB of its main bank back by moving to it from a console startup. `printf` to the screen
+  then goes nowhere: keep a console startup for a debug flavour that prints.
+- **Pin the z88dk build, and check it before believing an overflow.** One module compiled to 59 428 bytes with a
+  z88dk of December 2023 and to 56 844 with a nightly of 2026-08-10: with the old one a page overflowed on unmodified
+  sources, which looked exactly like a regression. Compare the first line `zcc` prints with the build the project
+  pins (in CI, a dated container image). The Windows nightly and the `z88dk/z88dk` container image of that same date
+  gave byte-identical `.nex` files.
+- **Test with the compiler and flags you ship.** In one application, zsdcc with `-SO3` and
+  `--max-allocs-per-node200000` **together** (z88dk nightly, August 2026) compiled a function that ORs event bits into
+  a local across several calls so that it returned 0: every bit set before a call was lost, a bit set after the last
+  call survived. Either flag alone, plain zsdcc and sccz80 compiled it correctly; making the accumulator a file-static
+  `volatile` fixed it. The unit tests stayed green throughout because the `+test` target's default compiler is
+  sccz80: they never compiled what shipped. Run every test twice, for example sccz80 `-O2` and
+  `zcc +test -compiler=sdcc -SO3 --max-allocs-per-node200000`. (Under `+test`, `--opt-code-size` garbled the test
+  harness's own `printf` output in that project; it was left out of the test builds only. Not investigated.)
 - A switch reaches both languages: `-DX=v` for C and `-Ca-DX=v` for the assembler, always with an explicit value.
 - Asm is Z80N first, memory first, speed always: load the `z80n-optimize` skill, and give bytes and T-states before
   and after for every change (the `z80-measure` skill of the `z80-common` plugin).
@@ -69,6 +85,12 @@ build script, refined over many milestones. They apply to any Next project; repl
   `.nex` is always the build to play. Never leave a debug build there; never overwrite a file in `debug/`, add names.
 - The version lives in one place (the build script); a check refuses disagreeing copies in the changelog and README.
 - Assets regenerate from their sources on every build; generated files stay out of git.
+- **A stale object links without a word.** When several flavours reuse the same object names, a compile that fails
+  or is dropped leaves the other flavour's object in place, and a check that the file exists passes. One project
+  released a `.nex` carrying one module of another flavour that way (compiles run in the background in a container,
+  exit codes unread). Delete each object before compiling it, read every compiler's exit code (when compiles run in
+  parallel, wait for each by its process ID), and require every linked object to be newer than the flavour's start.
+- Never run two builds in the same checkout at once: they overwrite each other's objects.
 
 ## Additional resources
 - `references/build-table.md`: the trimmed table, worktrees, refusal tests, the comparison regex, what to report.
