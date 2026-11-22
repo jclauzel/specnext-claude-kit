@@ -167,13 +167,15 @@ claude plugin marketplace remove specnext-claude-kit           # forget the kit 
 | [`zxnext-core`](plugins/zxnext-core/) | ZX Spectrum Next | `zxnext-build`, `zxnext-mame`, `z80n-optimize`, `zxnext-c-to-asm` | z88dk `+zxn` builds and room; MAME proofs; Z80N first; hot C rewritten in Z80N asm |
 | [`zxnext-unite-mcp`](plugins/zxnext-unite-mcp/) | ZX Spectrum Next | (an MCP server) | connects the ZX-Next-Unite app: disk images, MAME, CSpect, real Nexts |
 | [`zx-classic`](plugins/zx-classic/) | 48K / 128K Spectrum | `zx-memory-map` | memory map, screen layout, paging, contended memory |
+| [`jclauzel-z88dk-banked-c`](plugins/community/jclauzel-z88dk-banked-c/) | ZX Spectrum Next (community) | `z88dk-map-room`, `zxnext-banked-code` | where a z88dk program's bytes go; keeping C code in banked pages safe |
 | [`community/`](plugins/community/) | any | yours | add your own plugin here |
 
 Each plugin's README says what it was tested on and marks what is untested.
 
 ## The CLAUDE.md library
 - [`claude-md/snippets/`](claude-md/snippets/): small blocks to paste (Z80N first, memory first, measure do not
-  assume, tools in `extra/`, the MAME ROM warning, the scratchpad can be wiped, the ZX-Next-Unite MCP server).
+  assume, tools in `extra/`, the MAME ROM warning, the scratchpad can be wiped, the ZX-Next-Unite MCP server, what a
+  new assembly routine must keep).
 - [`claude-md/templates/`](claude-md/templates/): a whole `CLAUDE.md` per project type (Next with z88dk C, Next with
   sjasmplus, classic Spectrum asm). The untested ones say so.
 - [`claude-md/community/`](claude-md/community/): full `CLAUDE.md` files from real projects.
