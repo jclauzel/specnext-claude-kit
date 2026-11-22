@@ -108,6 +108,51 @@ projected cost on your machine, and `/context` in a session shows what is loaded
 - **Nothing to undo but the install:** disable or uninstall a plugin (below) and it stops loading; nothing else was
   changed.
 
+## Is the kit being used?
+Skills load by themselves, so it is fair to ask whether they did. Check from the outside in.
+
+**1. Installed and enabled?**
+- `claude plugin list` shows each plugin you installed, its version and whether it is enabled. In a session,
+  `/plugin` shows the same under **Installed**.
+- Installed for one project only (`--scope project` or `local`)? Then it loads only in that project.
+- Just installed or updated? A running session does not see it: run `/reload-plugins` or start a new session.
+
+**2. Does this session know the skills?**
+- `/skills` lists the skills this session can load. The kit's appear with their plugin's name in front:
+  `zxnext-core:zxnext-build`, `zxnext-core:zxnext-mame`, `z80-common:z80-measure` and so on.
+- `/context` shows what is in context right now, skills included (their names and descriptions cost about 1 000 tokens
+  for the Next set, see the table above).
+- `zxnext-unite-mcp`: `/mcp` should show `zx-next-unite` as connected, with its tools. If it says failed, the app is not
+  running or its server is off (see that plugin's README).
+
+**3. Was a skill used for this task?**
+- When Claude loads a skill, the conversation shows it: a `Skill` tool call naming it (for example
+  `zxnext-core:z80n-optimize`) followed by **Successfully loaded skill**. In the desktop app it is a tool row you can
+  expand. No such line means Claude answered from its own knowledge and your `CLAUDE.md`, not from the kit.
+- The ZX-Next-Unite tools show as tool calls whose names begin with `mcp__plugin_zxnext-unite-mcp_zx-next-unite__`
+  (or `mcp__zx-next-unite__` if you connected with `claude mcp add`).
+- The answers carry the skills' habits: bytes and T-states before and after each change, measured with `z88dk-ticks`
+  rather than guessed; the Z80N form named in place of the plain Z80 one; a 0 build checked byte for byte with an MD5;
+  a frame report read as the worst line against the budget. Seeing these is a good sign; their absence on a task
+  that matches a skill is a sign it did not load.
+- Not sure? Ask Claude: "Which skills and MCP tools did you use in this session?" It can read its own transcript.
+
+**4. A quick test.** In a project, ask something only a skill answers in its way, for example:
+```text
+Measure the bytes and T-states of "add hl,a" against "ld e,a / ld d,0 / add hl,de" on the Z80N.
+```
+You should see `z80-common:z80-measure` (and perhaps `zxnext-core:z80n-optimize`) load, then a measurement with
+`z88dk-ticks`, not figures from memory.
+
+**If a skill does not load when you expect it to**
+- Run it by name to rule out the install: `/zxnext-core:zxnext-build`. If that works, the task's wording did not match
+  the skill's description; say what you are doing in the skill's words ("build it", "time it on MAME"), or open an
+  issue with the prompt you used so the description can be improved.
+- Your own skill or your `CLAUDE.md` may cover the same job and win: that is by design (see "Can it interfere" above).
+  Keep one of the two; `/doctor` finds unused skills.
+- `claude plugin details zxnext-core@specnext-claude-kit` lists the skills Claude Code found in the plugin; a skill
+  missing there did not install.
+
 ## Updating the kit and your plugins
 When a new release is out (see [Releases](https://github.com/jclauzel/specnext-claude-kit/releases)), two steps:
 
