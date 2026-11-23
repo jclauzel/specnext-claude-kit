@@ -1,0 +1,11 @@
+{
+  "name": "zxnext-ql",
+  "version": "0.1.0",
+  "description": "Sinclair QL programs, the ZX Spectrum Next's QL core first: qdos-gcc C, QDOS and SMSQ/E, SuperBASIC, sQLux",
+  "author": {
+    "name": "jclauzel and contributors",
+    "url": "https://github.com/jclauzel"
+  },
+  "license": "MIT",
+  "keywords": ["zx-spectrum-next", "sinclair-ql", "qdos", "smsqe", "m68k", "superbasic"]
+}

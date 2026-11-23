@@ -30,7 +30,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MAX_MD_LINE = 120
 MAX_DESCRIPTION = 1536
 NAME_RE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
-TEXT_EXTENSIONS = {".md", ".json", ".py", ".yml", ".yaml", ".asm", ".txt", ".lua", ".sh", ".ps1", ".toml"}
+TEXT_EXTENSIONS = {".md", ".json", ".py", ".yml", ".yaml", ".asm", ".txt", ".lua", ".sh", ".ps1", ".toml", ".c", ".h",
+                   ".inc", ".bas"}
+TEXT_SUFFIXES = ("_bas", "_asm", "_c", "_h", "_txt")   # QDOS names: the QL writes program_bas, not program.bas
 TEXT_NAMES = {"LICENSE", "CODEOWNERS", ".gitignore", ".gitattributes"}
 SKIP_DIRS = {".git", "__pycache__", "node_modules"}
 
@@ -77,7 +79,8 @@ def walk_files():
 
 def is_text(path):
     name = os.path.basename(path)
-    return name in TEXT_NAMES or os.path.splitext(name)[1].lower() in TEXT_EXTENSIONS
+    return (name in TEXT_NAMES or os.path.splitext(name)[1].lower() in TEXT_EXTENSIONS
+            or name.lower().endswith(TEXT_SUFFIXES))
 
 
 def read_text(path):
