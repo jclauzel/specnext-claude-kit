@@ -29,7 +29,9 @@ $Root = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 $MaxMdLine = 120
 $MaxDescription = 1536
 $NameRe = '^[a-z0-9][a-z0-9-]*$'
-$TextExtensions = @('.md', '.json', '.py', '.yml', '.yaml', '.asm', '.txt', '.lua', '.sh', '.ps1', '.toml')
+$TextExtensions = @('.md', '.json', '.py', '.yml', '.yaml', '.asm', '.txt', '.lua', '.sh', '.ps1', '.toml',
+    '.c', '.h', '.inc', '.bas')
+$TextSuffixes = '(_bas|_asm|_c|_h|_txt)$'   # QDOS names: the QL writes program_bas, not program.bas
 $TextNames = @('LICENSE', 'CODEOWNERS', '.gitignore', '.gitattributes')
 $SkipDirs = @('.git', '__pycache__', 'node_modules')
 
@@ -83,7 +85,8 @@ function Get-RepoFiles {
 function Test-IsText([string]$Path) {
     $name = [System.IO.Path]::GetFileName($Path)
     $ext = [System.IO.Path]::GetExtension($name).ToLowerInvariant()
-    return ($TextNames -contains $name) -or ($TextExtensions -contains $ext)
+    return ($TextNames -contains $name) -or ($TextExtensions -contains $ext) -or
+        ($name.ToLowerInvariant() -match $TextSuffixes)
 }
 
 function Read-Text([string]$Path) {

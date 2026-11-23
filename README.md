@@ -1,7 +1,7 @@
 # specnext-claude-kit
 
 Claude Code skills and `CLAUDE.md` material for ZX Spectrum development, shared by the community: the ZX Spectrum
-Next first, the classic 48K/128K Spectrum beside it, and Z80 material common to both.
+Next first (its QL core included), the classic 48K/128K Spectrum beside it, and Z80 material common to both.
 
 It is two things in one repository:
 - a **Claude Code plugin marketplace**: install the skills with two commands, and get updates when they improve;
@@ -15,7 +15,7 @@ Open Claude Code in your own game's folder and paste one of these.
 change it makes shows in `git diff` and can be undone (see "Install in two commands").
 ```text
 Look at https://github.com/jclauzel/specnext-claude-kit and compare it with this project: my CLAUDE.md files,
-my build scripts and toolchain, the platform I target (Spectrum Next, classic Spectrum or both), my assembly and
+my build scripts and toolchain, the platform I target (Spectrum Next, its QL core, classic Spectrum), my assembly and
 how I test (emulators, real hardware). Tell me which of its plugins, skills, CLAUDE.md snippets and templates
 would help me and why, and which would not. Then offer me the concrete changes: the install commands, and the
 edits to my CLAUDE.md as a diff. Change nothing until I say yes to each one.
@@ -39,16 +39,19 @@ Show me every file and the full diff, and ask me before you fork, push or open t
 | You are... | Install | Why |
 |---|---|---|
 | writing for the **Spectrum Next** (C, asm or both) | `zxnext-core` and `z80-common` | the Next skills; `zxnext-core` refers to `z80-common`'s measuring |
+| writing for the **Next's QL core**, or any Sinclair QL | `zxnext-ql` | a 68000 machine: none of the Z80 plugins apply to it |
 | using the **ZX-Next-Unite** app, or want Claude to start MAME / CSpect or reach a real Next | add `zxnext-unite-mcp` | a connection to the app (an MCP server), not skills: the app must be running |
 | writing for the **classic 48K / 128K Spectrum** | `zx-classic` and `z80-common` | the classic machine's map and timing, plus Z80 measuring |
 | writing Z80 for **any other machine** | `z80-common` | measuring T-states and laying out code, for any Z80 |
 
 The plugins in short:
 - **`z80-common`** is the shared base: how to measure bytes and T-states instead of guessing, and how to lay out
-  branches. Every other plugin builds on it.
+  branches. The other Z80 plugins build on it.
 - **`zxnext-core`** is the Spectrum Next: building with z88dk `+zxn` (the .nex, room per page, build switches, a build
   table), proving and timing on MAME safely, writing Z80N first, and rewriting the hottest C in Z80N asm without
   changing what the player sees.
+- **`zxnext-ql`** is the Sinclair QL, with the Next's QL core first: C with qdos-gcc, QDOS and SMSQ/E, SuperBASIC, the
+  core's own hardware, and scripted runs on sQLux. It stands alone.
 - **`zxnext-unite-mcp`** adds tools rather than knowledge: it lets Claude drive the ZX-Next-Unite app (load a disk
   image, put files on it, start MAME or CSpect, push a build to a real Next). See its README to enable the app's server.
 - **`zx-classic`** is the classic Spectrum: the memory map, the screen layout, 128K paging and contended memory.
@@ -65,10 +68,10 @@ claude plugin marketplace add jclauzel/specnext-claude-kit
 claude plugin install zxnext-core@specnext-claude-kit
 ```
 Then add the others the table above says you need, the same way (`z80-common@specnext-claude-kit`,
-`zx-classic@specnext-claude-kit`, `zxnext-unite-mcp@specnext-claude-kit`), or browse them with `/plugin` inside a
-session. You do not call a skill by name: Claude loads it by itself when your task matches its description ("build
-it", "how much room is left", "time it on MAME"). To run one on purpose, type its plugin and skill name as a
-command, for example `/zxnext-core:zxnext-build` or `/z80-common:z80-measure`.
+`zx-classic@specnext-claude-kit`, `zxnext-ql@specnext-claude-kit`, `zxnext-unite-mcp@specnext-claude-kit`), or browse
+them with `/plugin` inside a session. You do not call a skill by name: Claude loads it by itself when your task matches
+its description ("build it", "how much room is left", "time it on MAME"). To run one on purpose, type its plugin and
+skill name as a command, for example `/zxnext-core:zxnext-build` or `/z80-common:z80-measure`.
 
 **After installing, tidy up with `/doctor`.** Start a new session in your project and run `/doctor`. On recent Claude
 Code it checks your `CLAUDE.md` files and skills next to the ones you just installed: a skill of your own that now
@@ -104,6 +107,7 @@ exists; the rest of the skill loads only when your task matches (or when you run
 |---|---|---|
 | `zxnext-core` (4 skills) | about 760 tokens | about 900-1 500 per skill, plus 600-750 if it reads its reference |
 | `z80-common` (2 skills) | about 230 tokens | about 650-900 per skill |
+| `zxnext-ql` (5 skills) | about 920 tokens | about 1 200-1 700 per skill, plus 600-1 300 per reference it reads |
 | `zx-classic` (1 skill) | about 150 tokens | about 1 450 |
 | `zxnext-unite-mcp` | the names of its tools (a few hundred tokens); each tool's details load only when used | the tool calls you make |
 
@@ -207,7 +211,7 @@ claude plugin enable zxnext-core@specnext-claude-kit
 To remove plugins, uninstall each one you installed, then remove the kit's marketplace:
 
 ```sh
-claude plugin uninstall zxnext-core@specnext-claude-kit        # repeat for z80-common, zx-classic, zxnext-unite-mcp
+claude plugin uninstall zxnext-core@specnext-claude-kit        # repeat for each one you installed
 claude plugin marketplace remove specnext-claude-kit           # forget the kit itself (after its plugins are gone)
 ```
 
@@ -224,6 +228,7 @@ claude plugin marketplace remove specnext-claude-kit           # forget the kit 
 |---|---|---|---|
 | [`z80-common`](plugins/z80-common/) | every Z80 machine | `z80-measure`, `z80-code-layout` | bytes and T-states measured with z88dk-ticks; branch layout |
 | [`zxnext-core`](plugins/zxnext-core/) | ZX Spectrum Next | `zxnext-build`, `zxnext-mame`, `z80n-optimize`, `zxnext-c-to-asm` | z88dk `+zxn` builds and room; MAME proofs; Z80N first; hot C rewritten in Z80N asm |
+| [`zxnext-ql`](plugins/zxnext-ql/) | the Next's QL core, any Sinclair QL | `ql-c-build`, `ql-next-core`, `ql-qdos-c`, `ql-superbasic`, `ql-emulators` | qdos-gcc's traps and a scanner for its a6 bug; the core's registers; QDOS from C; a SuperBASIC linter; sQLux runs |
 | [`zxnext-unite-mcp`](plugins/zxnext-unite-mcp/) | ZX Spectrum Next | (an MCP server) | connects the ZX-Next-Unite app: disk images, MAME, CSpect, real Nexts |
 | [`zx-classic`](plugins/zx-classic/) | 48K / 128K Spectrum | `zx-memory-map` | memory map, screen layout, paging, contended memory |
 | [`jclauzel-z88dk-banked-c`](plugins/community/jclauzel-z88dk-banked-c/) | ZX Spectrum Next (community) | `z88dk-map-room`, `zxnext-banked-code` | where a z88dk program's bytes go; keeping C code in banked pages safe |
@@ -236,7 +241,7 @@ Each plugin's README says what it was tested on and marks what is untested.
   assume, tools in `extra/`, the MAME ROM warning, the scratchpad can be wiped, the ZX-Next-Unite MCP server, what a
   new assembly routine must keep).
 - [`claude-md/templates/`](claude-md/templates/): a whole `CLAUDE.md` per project type (Next with z88dk C, Next with
-  sjasmplus, classic Spectrum asm). The untested ones say so.
+  sjasmplus, classic Spectrum asm, the QL core in C). The untested ones say so.
 - [`claude-md/community/`](claude-md/community/): full `CLAUDE.md` files from real projects.
 
 ## Docs
@@ -248,6 +253,9 @@ Each plugin's README says what it was tested on and marks what is untested.
 - [`examples/z80n-hw-timing/`](examples/z80n-hw-timing/): `z80ntime.nex`, a Next program that measures Z80N
   instruction T-states on the hardware by counting raster lines (`test n`, `push nn`, `add hl,a`, `mul d,e` against
   their plain forms, at 3.5 to 28 MHz), shows a table and writes it to a CSV file on the SD card.
+
+## Helper tools
+- [`extra/ql-tools/`](extra/ql-tools/): the QL scripts that `zxnext-ql` carries, with their tests.
 
 ## Contribute
 Pull requests are welcome: a new skill, a fix, a measurement, your `CLAUDE.md`. Read [CONTRIBUTING.md](CONTRIBUTING.md),

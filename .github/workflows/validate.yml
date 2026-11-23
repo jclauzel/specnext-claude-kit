@@ -23,3 +23,5 @@ jobs:
       - name: Run the same checks in PowerShell (keeps validate.ps1 in step with validate.py)
         shell: pwsh
         run: ./tools/validate.ps1
+      - name: Test the QL scripts, and that the plugin carries the same copies
+        run: python extra/ql-tools/test_ql_tools.py

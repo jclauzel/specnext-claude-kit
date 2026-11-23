@@ -1,6 +1,6 @@
 {
   "name": "specnext-claude-kit",
-  "description": "Community Claude Code skills and CLAUDE.md material for ZX Spectrum Next, classic ZX Spectrum and Z80 development",
+  "description": "Community Claude Code skills and CLAUDE.md material for ZX Spectrum Next (its QL core included), classic ZX Spectrum and Z80 development",
   "owner": {
     "name": "jclauzel",
     "url": "https://github.com/jclauzel"
@@ -19,6 +19,13 @@
       "description": "ZX Spectrum Next: building with z88dk +zxn, proving builds on MAME, Z80N optimisation, rewriting hot C in Z80N asm",
       "category": "zx-spectrum-next",
       "tags": ["zx-spectrum-next", "z88dk", "mame", "z80n", "nex"]
+    },
+    {
+      "name": "zxnext-ql",
+      "source": "./plugins/zxnext-ql",
+      "description": "Sinclair QL programs, the ZX Spectrum Next's QL core first: qdos-gcc C, QDOS and SMSQ/E, SuperBASIC, sQLux",
+      "category": "sinclair-ql",
+      "tags": ["zx-spectrum-next", "sinclair-ql", "qdos", "m68k", "superbasic"]
     },
     {
       "name": "zxnext-unite-mcp",
