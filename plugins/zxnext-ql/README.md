@@ -11,7 +11,7 @@ loaded the Next is a 68000 machine, so the Z80 and Z80N plugins do not apply (an
 | `ql-superbasic` | SuperBASIC's traps on Minerva, Toolkit II and SMSQ/E, and a linter to run on the PC |
 | `ql-emulators` | Scripted runs on sQLux, what its Windows build gets wrong, the `TCP_` device, QPC2 |
 
-Install: `claude plugin install zxnext-ql@specnext-claude-kit`. Working on both kinds of Next program? If a project's
+Install: `claude plugin install zxnext-ql@zx-next-claude-kit`. Working on both kinds of Next program? If a project's
 `CLAUDE.md` says "Z80N first", say there that its QL part is 68000 code (there is a template for a QL project in
 `claude-md/templates/ql-core-c.md`).
 

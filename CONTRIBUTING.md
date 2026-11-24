@@ -13,8 +13,8 @@ Before you build anything, make sure nobody has shared it, or is sharing it righ
   `claude-md/snippets/` and `claude-md/templates/`, and `docs/z80n-measured.md` for measurements.
 - **What is in progress:** the open pull requests and issues, on GitHub or from a terminal:
   ```sh
-  gh pr list -R jclauzel/specnext-claude-kit --state all --search "<topic>"
-  gh issue list -R jclauzel/specnext-claude-kit --state all --search "<topic>"
+  gh pr list -R jclauzel/zx-next-claude-kit --state all --search "<topic>"
+  gh issue list -R jclauzel/zx-next-claude-kit --state all --search "<topic>"
   ```
 - **If yours overlaps something, improve that one** (a fix, a measurement, another machine or toolchain it was tested
   on) instead of adding a second version of it.

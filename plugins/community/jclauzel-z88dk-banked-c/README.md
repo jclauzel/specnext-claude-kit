@@ -9,7 +9,7 @@ door) and repeats none of it.
 | `z88dk-map-room` | Rank a z88dk `.map` by symbol size in the main bank and in each banked page (`scripts/map_report.py`); library code the source never names; the no-console startup `-startup=31` and the heap pragmas; reading room figures without being fooled (room that only moved, big structs as locals under zsdcc) |
 | `zxnext-banked-code` | The rules for C code in pages that share one MMU slot: no direct call between two pages, no OS call without a main-bank wrapper, trampolines that restore the page they found, where constants go, interrupt handlers, code under an open Layer 2 write window, and a call-graph check to build for your project |
 
-Install: `claude plugin install jclauzel-z88dk-banked-c@specnext-claude-kit` (with `zxnext-core@specnext-claude-kit`,
+Install: `claude plugin install jclauzel-z88dk-banked-c@zx-next-claude-kit` (with `zxnext-core@zx-next-claude-kit`,
 which these skills refer to).
 
 ## Tested on
