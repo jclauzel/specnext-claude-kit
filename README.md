@@ -1,4 +1,4 @@
-# specnext-claude-kit
+# zx-next-claude-kit
 
 Claude Code skills and `CLAUDE.md` material for ZX Spectrum development, shared by the community: the ZX Spectrum
 Next first (its QL core included), the classic 48K/128K Spectrum beside it, and Z80 material common to both.
@@ -14,7 +14,7 @@ Open Claude Code in your own game's folder and paste one of these.
 **Use the kit:** see what fits your project, and get the changes offered to you. Commit your project first, so every
 change it makes shows in `git diff` and can be undone (see "Install in two commands").
 ```text
-Look at https://github.com/jclauzel/specnext-claude-kit and compare it with this project: my CLAUDE.md files,
+Look at https://github.com/jclauzel/zx-next-claude-kit and compare it with this project: my CLAUDE.md files,
 my build scripts and toolchain, the platform I target (Spectrum Next, its QL core, classic Spectrum), my assembly and
 how I test (emulators, real hardware). Tell me which of its plugins, skills, CLAUDE.md snippets and templates
 would help me and why, and which would not. Then offer me the concrete changes: the install commands, and the
@@ -25,7 +25,7 @@ edits to my CLAUDE.md as a diff. Change nothing until I say yes to each one.
 trims and checks your `CLAUDE.md` files and skills, so what you share is lean and loads (see CONTRIBUTING.md).
 ```text
 Look at this project's CLAUDE.md files, Claude skills and helper tools, and at
-https://github.com/jclauzel/specnext-claude-kit (read its CONTRIBUTING.md first). Compare what I have with
+https://github.com/jclauzel/zx-next-claude-kit (read its CONTRIBUTING.md first). Compare what I have with
 everything the kit already has, including its open pull requests and issues, and skip what is already covered;
 where mine overlaps an existing skill or snippet, propose an improvement to that one instead of a second version.
 For the rest, draft a contribution: a plugin under plugins/community/<my-github-name>-<topic>/ and/or CLAUDE.md
@@ -64,11 +64,11 @@ it is not in git, and copy your own `~/.claude/CLAUDE.md`, `~/.claude/skills/` a
 have them. Then any change you regret is one `git checkout` or one copy away.
 
 ```sh
-claude plugin marketplace add jclauzel/specnext-claude-kit
-claude plugin install zxnext-core@specnext-claude-kit
+claude plugin marketplace add jclauzel/zx-next-claude-kit
+claude plugin install zxnext-core@zx-next-claude-kit
 ```
-Then add the others the table above says you need, the same way (`z80-common@specnext-claude-kit`,
-`zx-classic@specnext-claude-kit`, `zxnext-ql@specnext-claude-kit`, `zxnext-unite-mcp@specnext-claude-kit`), or browse
+Then add the others the table above says you need, the same way (`z80-common@zx-next-claude-kit`,
+`zx-classic@zx-next-claude-kit`, `zxnext-ql@zx-next-claude-kit`, `zxnext-unite-mcp@zx-next-claude-kit`), or browse
 them with `/plugin` inside a session. You do not call a skill by name: Claude loads it by itself when your task matches
 its description ("build it", "how much room is left", "time it on MAME"). To run one on purpose, type its plugin and
 skill name as a command, for example `/zxnext-core:zxnext-build` or `/z80-common:z80-measure`.
@@ -112,7 +112,7 @@ exists; the rest of the skill loads only when your task matches (or when you run
 | `zxnext-unite-mcp` | the names of its tools (a few hundred tokens); each tool's details load only when used | the tool calls you make |
 
 So the Next set (`zxnext-core` and `z80-common`) adds about 1 000 tokens to every session, and a skill in use adds one
-to two thousand more for that task. After installing, `claude plugin details zxnext-core@specnext-claude-kit` shows the
+to two thousand more for that task. After installing, `claude plugin details zxnext-core@zx-next-claude-kit` shows the
 projected cost on your machine, and `/context` in a session shows what is loaded right now.
 
 **Can it interfere with what I already have?**
@@ -168,21 +168,21 @@ You should see `z80-common:z80-measure` (and perhaps `zxnext-core:z80n-optimize`
   issue with the prompt you used so the description can be improved.
 - Your own skill or your `CLAUDE.md` may cover the same job and win: that is by design (see "Can it interfere" above).
   Keep one of the two; `/doctor` finds unused skills.
-- `claude plugin details zxnext-core@specnext-claude-kit` lists the skills Claude Code found in the plugin; a skill
+- `claude plugin details zxnext-core@zx-next-claude-kit` lists the skills Claude Code found in the plugin; a skill
   missing there did not install.
 
 ## Updating the kit and your plugins
-When a new release is out (see [Releases](https://github.com/jclauzel/specnext-claude-kit/releases)), two steps:
+When a new release is out (see [Releases](https://github.com/jclauzel/zx-next-claude-kit/releases)), two steps:
 
 ```sh
-claude plugin marketplace update specnext-claude-kit   # 1. fetch the kit's latest catalogue from GitHub
-claude plugin update zxnext-core@specnext-claude-kit   # 2. update each plugin you installed (repeat per plugin)
+claude plugin marketplace update zx-next-claude-kit   # 1. fetch the kit's latest catalogue from GitHub
+claude plugin update zxnext-core@zx-next-claude-kit   # 2. update each plugin you installed (repeat per plugin)
 ```
 
 Then restart Claude Code (or start a new session): a plugin update applies at the next start.
 
 **Get updates automatically** (set it once): in a Claude Code session run `/plugin`, open the **Marketplaces** tab,
-select `specnext-claude-kit` and choose **Enable auto-update**. Third-party marketplaces like this one start with it
+select `zx-next-claude-kit` and choose **Enable auto-update**. Third-party marketplaces like this one start with it
 off, and only you can turn it on. From then on, a little while after your first message in a session (a random wait of
 up to ten minutes), Claude Code refreshes the kit and updates the plugins you installed. It then tells you
 `Plugin updated: <name> · Run /reload-plugins to apply`: run `/reload-plugins` (or start a new session) to use the new
@@ -200,19 +200,33 @@ turns plugin updates back on). The kit itself never checks for updates or calls 
   update by themselves: compare yours with the new version (the release notes say what changed), or paste the README's
   **Use the kit** prompt again and Claude will offer you the changes.
 
+### Installed before the rename?
+The kit was called `specnext-claude-kit` until v0.4.0. GitHub sends the old address to the new one, but Claude Code
+knows the kit by its name, so switch once. Uninstall each kit plugin you installed, forget the old name, then add the
+new one and install the same plugins again:
+
+```sh
+claude plugin uninstall zxnext-core@specnext-claude-kit       # repeat for each one you installed
+claude plugin marketplace remove specnext-claude-kit
+claude plugin marketplace add jclauzel/zx-next-claude-kit
+claude plugin install zxnext-core@zx-next-claude-kit          # repeat for each one you want
+```
+
+The plugins and skills keep their names. If you turned auto-update on, turn it on again for the new name.
+
 ## Uninstalling
 To pause a plugin without removing it, disable it, and enable it again later:
 
 ```sh
-claude plugin disable zxnext-core@specnext-claude-kit
-claude plugin enable zxnext-core@specnext-claude-kit
+claude plugin disable zxnext-core@zx-next-claude-kit
+claude plugin enable zxnext-core@zx-next-claude-kit
 ```
 
 To remove plugins, uninstall each one you installed, then remove the kit's marketplace:
 
 ```sh
-claude plugin uninstall zxnext-core@specnext-claude-kit        # repeat for each one you installed
-claude plugin marketplace remove specnext-claude-kit           # forget the kit itself (after its plugins are gone)
+claude plugin uninstall zxnext-core@zx-next-claude-kit        # repeat for each one you installed
+claude plugin marketplace remove zx-next-claude-kit           # forget the kit itself (after its plugins are gone)
 ```
 
 - `claude plugin list` shows what is still installed. Inside a session, `/plugin` does the same from a menu.

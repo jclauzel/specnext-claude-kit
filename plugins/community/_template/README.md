@@ -6,7 +6,7 @@ One paragraph: what this plugin is for.
 |---|---|
 | `example-skill` | One line |
 
-Install: `claude plugin install author-topic@specnext-claude-kit`.
+Install: `claude plugin install author-topic@zx-next-claude-kit`.
 
 ## Tested on
 - Machine or emulator and version (for example MAME 0.289 `specnext_ks3`, a Next on core 3.x, Fuse 1.6).

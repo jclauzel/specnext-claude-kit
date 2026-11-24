@@ -28,8 +28,8 @@ The app's own documentation (`docs/MCP_SERVER.md` in its repository) lists every
 Either install this plugin:
 
 ```sh
-claude plugin marketplace add jclauzel/specnext-claude-kit
-claude plugin install zxnext-unite-mcp@specnext-claude-kit
+claude plugin marketplace add jclauzel/zx-next-claude-kit
+claude plugin install zxnext-unite-mcp@zx-next-claude-kit
 ```
 
 or skip the plugin and add the server directly (the one-line connect; the app's Settings has a button that copies it,

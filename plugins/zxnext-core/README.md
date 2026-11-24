@@ -9,7 +9,7 @@ Skills for ZX Spectrum Next development with z88dk.
 | `z80n-optimize` | Z80N first, memory first, speed always: the Z80N replacements with bytes and T-states, the ones that can lose, hardware before opcodes, flagging opportunities in existing code |
 | `zxnext-c-to-asm` | Rewriting the hottest C (zsdcc) in Z80N asm safely: profile first, the C kept above the asm in `; C:` blocks, zsdcc's calling convention, a switch whose 0 build is the old C byte for byte, a C-against-asm harness with mutants, a stop rule, one shared bank door, proving nothing visible changed |
 
-Install: `claude plugin install zxnext-core@specnext-claude-kit` (and `z80-common@specnext-claude-kit`, which these
+Install: `claude plugin install zxnext-core@zx-next-claude-kit` (and `z80-common@zx-next-claude-kit`, which these
 skills refer to).
 
 ## Tested on
